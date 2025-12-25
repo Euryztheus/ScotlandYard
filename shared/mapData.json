@@ -1,0 +1,5814 @@
+{
+  "nodes": {
+    "1": {
+      "id": 1,
+      "x": 413,
+      "y": 203,
+      "types": [
+        "taxi",
+        "bus",
+        "underground"
+      ],
+      "edges": [
+        {
+          "to": 8,
+          "type": "taxi"
+        },
+        {
+          "to": 9,
+          "type": "taxi"
+        },
+        {
+          "to": 46,
+          "type": "bus"
+        },
+        {
+          "to": 46,
+          "type": "underground"
+        },
+        {
+          "to": 58,
+          "type": "bus"
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "x": 897,
+      "y": 99,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 10,
+          "type": "taxi"
+        },
+        {
+          "to": 20,
+          "type": "taxi"
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "x": 1210,
+      "y": 135,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 4,
+          "type": "taxi"
+        },
+        {
+          "to": 11,
+          "type": "taxi"
+        },
+        {
+          "to": 12,
+          "type": "taxi"
+        },
+        {
+          "to": 22,
+          "type": "bus"
+        },
+        {
+          "to": 23,
+          "type": "bus"
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "x": 1359,
+      "y": 123,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 3,
+          "type": "taxi"
+        },
+        {
+          "to": 13,
+          "type": "taxi"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "x": 2181,
+      "y": 198,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 15,
+          "type": "taxi"
+        },
+        {
+          "to": 16,
+          "type": "taxi"
+        }
+      ]
+    },
+    "6": {
+      "id": 6,
+      "x": 2416,
+      "y": 214,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 7,
+          "type": "taxi"
+        },
+        {
+          "to": 29,
+          "type": "taxi"
+        }
+      ]
+    },
+    "7": {
+      "id": 7,
+      "x": 2652,
+      "y": 223,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 6,
+          "type": "taxi"
+        },
+        {
+          "to": 17,
+          "type": "taxi"
+        },
+        {
+          "to": 42,
+          "type": "bus"
+        }
+      ]
+    },
+    "8": {
+      "id": 8,
+      "x": 327,
+      "y": 303,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 1,
+          "type": "taxi"
+        },
+        {
+          "to": 18,
+          "type": "taxi"
+        },
+        {
+          "to": 19,
+          "type": "taxi"
+        }
+      ]
+    },
+    "9": {
+      "id": 9,
+      "x": 523,
+      "y": 322,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 1,
+          "type": "taxi"
+        },
+        {
+          "to": 19,
+          "type": "taxi"
+        },
+        {
+          "to": 20,
+          "type": "taxi"
+        }
+      ]
+    },
+    "10": {
+      "id": 10,
+      "x": 1065,
+      "y": 313,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 2,
+          "type": "taxi"
+        },
+        {
+          "to": 11,
+          "type": "taxi"
+        },
+        {
+          "to": 21,
+          "type": "taxi"
+        },
+        {
+          "to": 34,
+          "type": "taxi"
+        }
+      ]
+    },
+    "11": {
+      "id": 11,
+      "x": 1206,
+      "y": 301,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 3,
+          "type": "taxi"
+        },
+        {
+          "to": 10,
+          "type": "taxi"
+        },
+        {
+          "to": 22,
+          "type": "taxi"
+        }
+      ]
+    },
+    "12": {
+      "id": 12,
+      "x": 1298,
+      "y": 275,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 3,
+          "type": "taxi"
+        },
+        {
+          "to": 23,
+          "type": "taxi"
+        }
+      ]
+    },
+    "13": {
+      "id": 13,
+      "x": 1532,
+      "y": 337,
+      "types": [
+        "taxi",
+        "bus",
+        "underground"
+      ],
+      "edges": [
+        {
+          "to": 4,
+          "type": "taxi"
+        },
+        {
+          "to": 14,
+          "type": "bus"
+        },
+        {
+          "to": 14,
+          "type": "taxi"
+        },
+        {
+          "to": 23,
+          "type": "bus"
+        },
+        {
+          "to": 23,
+          "type": "taxi"
+        },
+        {
+          "to": 24,
+          "type": "taxi"
+        },
+        {
+          "to": 46,
+          "type": "underground"
+        },
+        {
+          "to": 52,
+          "type": "bus"
+        },
+        {
+          "to": 67,
+          "type": "underground"
+        },
+        {
+          "to": 89,
+          "type": "underground"
+        }
+      ]
+    },
+    "14": {
+      "id": 14,
+      "x": 1783,
+      "y": 269,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 13,
+          "type": "bus"
+        },
+        {
+          "to": 13,
+          "type": "taxi"
+        },
+        {
+          "to": 15,
+          "type": "bus"
+        },
+        {
+          "to": 15,
+          "type": "taxi"
+        },
+        {
+          "to": 25,
+          "type": "taxi"
+        }
+      ]
+    },
+    "15": {
+      "id": 15,
+      "x": 2018,
+      "y": 271,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 5,
+          "type": "taxi"
+        },
+        {
+          "to": 14,
+          "type": "bus"
+        },
+        {
+          "to": 14,
+          "type": "taxi"
+        },
+        {
+          "to": 16,
+          "type": "taxi"
+        },
+        {
+          "to": 26,
+          "type": "taxi"
+        },
+        {
+          "to": 28,
+          "type": "taxi"
+        },
+        {
+          "to": 29,
+          "type": "bus"
+        },
+        {
+          "to": 41,
+          "type": "bus"
+        }
+      ]
+    },
+    "16": {
+      "id": 16,
+      "x": 2222,
+      "y": 348,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 5,
+          "type": "taxi"
+        },
+        {
+          "to": 15,
+          "type": "taxi"
+        },
+        {
+          "to": 28,
+          "type": "taxi"
+        },
+        {
+          "to": 29,
+          "type": "taxi"
+        }
+      ]
+    },
+    "17": {
+      "id": 17,
+      "x": 2629,
+      "y": 433,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 7,
+          "type": "taxi"
+        },
+        {
+          "to": 29,
+          "type": "taxi"
+        },
+        {
+          "to": 30,
+          "type": "taxi"
+        }
+      ]
+    },
+    "18": {
+      "id": 18,
+      "x": 221,
+      "y": 398,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 8,
+          "type": "taxi"
+        },
+        {
+          "to": 31,
+          "type": "taxi"
+        },
+        {
+          "to": 43,
+          "type": "taxi"
+        }
+      ]
+    },
+    "19": {
+      "id": 19,
+      "x": 388,
+      "y": 414,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 8,
+          "type": "taxi"
+        },
+        {
+          "to": 9,
+          "type": "taxi"
+        },
+        {
+          "to": 32,
+          "type": "taxi"
+        }
+      ]
+    },
+    "20": {
+      "id": 20,
+      "x": 636,
+      "y": 376,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 2,
+          "type": "taxi"
+        },
+        {
+          "to": 9,
+          "type": "taxi"
+        },
+        {
+          "to": 33,
+          "type": "taxi"
+        }
+      ]
+    },
+    "21": {
+      "id": 21,
+      "x": 848,
+      "y": 478,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 10,
+          "type": "taxi"
+        },
+        {
+          "to": 33,
+          "type": "taxi"
+        }
+      ]
+    },
+    "22": {
+      "id": 22,
+      "x": 1227,
+      "y": 520,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 3,
+          "type": "bus"
+        },
+        {
+          "to": 11,
+          "type": "taxi"
+        },
+        {
+          "to": 23,
+          "type": "bus"
+        },
+        {
+          "to": 23,
+          "type": "taxi"
+        },
+        {
+          "to": 34,
+          "type": "bus"
+        },
+        {
+          "to": 34,
+          "type": "taxi"
+        },
+        {
+          "to": 35,
+          "type": "taxi"
+        },
+        {
+          "to": 65,
+          "type": "bus"
+        }
+      ]
+    },
+    "23": {
+      "id": 23,
+      "x": 1399,
+      "y": 430,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 3,
+          "type": "bus"
+        },
+        {
+          "to": 12,
+          "type": "taxi"
+        },
+        {
+          "to": 13,
+          "type": "bus"
+        },
+        {
+          "to": 13,
+          "type": "taxi"
+        },
+        {
+          "to": 22,
+          "type": "bus"
+        },
+        {
+          "to": 22,
+          "type": "taxi"
+        },
+        {
+          "to": 37,
+          "type": "taxi"
+        },
+        {
+          "to": 67,
+          "type": "bus"
+        }
+      ]
+    },
+    "24": {
+      "id": 24,
+      "x": 1687,
+      "y": 445,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 13,
+          "type": "taxi"
+        },
+        {
+          "to": 37,
+          "type": "taxi"
+        },
+        {
+          "to": 38,
+          "type": "taxi"
+        }
+      ]
+    },
+    "25": {
+      "id": 25,
+      "x": 1816,
+      "y": 463,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 14,
+          "type": "taxi"
+        },
+        {
+          "to": 38,
+          "type": "taxi"
+        },
+        {
+          "to": 39,
+          "type": "taxi"
+        }
+      ]
+    },
+    "26": {
+      "id": 26,
+      "x": 1999,
+      "y": 323,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 15,
+          "type": "taxi"
+        },
+        {
+          "to": 27,
+          "type": "taxi"
+        },
+        {
+          "to": 39,
+          "type": "taxi"
+        }
+      ]
+    },
+    "27": {
+      "id": 27,
+      "x": 2022,
+      "y": 445,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 26,
+          "type": "taxi"
+        },
+        {
+          "to": 28,
+          "type": "taxi"
+        },
+        {
+          "to": 40,
+          "type": "taxi"
+        }
+      ]
+    },
+    "28": {
+      "id": 28,
+      "x": 2095,
+      "y": 391,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 15,
+          "type": "taxi"
+        },
+        {
+          "to": 16,
+          "type": "taxi"
+        },
+        {
+          "to": 27,
+          "type": "taxi"
+        },
+        {
+          "to": 41,
+          "type": "taxi"
+        }
+      ]
+    },
+    "29": {
+      "id": 29,
+      "x": 2403,
+      "y": 488,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 6,
+          "type": "taxi"
+        },
+        {
+          "to": 15,
+          "type": "bus"
+        },
+        {
+          "to": 16,
+          "type": "taxi"
+        },
+        {
+          "to": 17,
+          "type": "taxi"
+        },
+        {
+          "to": 41,
+          "type": "bus"
+        },
+        {
+          "to": 41,
+          "type": "taxi"
+        },
+        {
+          "to": 42,
+          "type": "bus"
+        },
+        {
+          "to": 42,
+          "type": "taxi"
+        },
+        {
+          "to": 55,
+          "type": "bus"
+        }
+      ]
+    },
+    "30": {
+      "id": 30,
+      "x": 2706,
+      "y": 473,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 17,
+          "type": "taxi"
+        },
+        {
+          "to": 42,
+          "type": "taxi"
+        }
+      ]
+    },
+    "31": {
+      "id": 31,
+      "x": 279,
+      "y": 476,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 18,
+          "type": "taxi"
+        },
+        {
+          "to": 43,
+          "type": "taxi"
+        },
+        {
+          "to": 44,
+          "type": "taxi"
+        }
+      ]
+    },
+    "32": {
+      "id": 32,
+      "x": 543,
+      "y": 551,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 19,
+          "type": "taxi"
+        },
+        {
+          "to": 33,
+          "type": "taxi"
+        },
+        {
+          "to": 44,
+          "type": "taxi"
+        },
+        {
+          "to": 45,
+          "type": "taxi"
+        }
+      ]
+    },
+    "33": {
+      "id": 33,
+      "x": 754,
+      "y": 529,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 20,
+          "type": "taxi"
+        },
+        {
+          "to": 21,
+          "type": "taxi"
+        },
+        {
+          "to": 32,
+          "type": "taxi"
+        },
+        {
+          "to": 46,
+          "type": "taxi"
+        }
+      ]
+    },
+    "34": {
+      "id": 34,
+      "x": 1082,
+      "y": 548,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 10,
+          "type": "taxi"
+        },
+        {
+          "to": 22,
+          "type": "bus"
+        },
+        {
+          "to": 22,
+          "type": "taxi"
+        },
+        {
+          "to": 46,
+          "type": "bus"
+        },
+        {
+          "to": 47,
+          "type": "taxi"
+        },
+        {
+          "to": 48,
+          "type": "taxi"
+        },
+        {
+          "to": 63,
+          "type": "bus"
+        }
+      ]
+    },
+    "35": {
+      "id": 35,
+      "x": 1280,
+      "y": 631,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 22,
+          "type": "taxi"
+        },
+        {
+          "to": 36,
+          "type": "taxi"
+        },
+        {
+          "to": 48,
+          "type": "taxi"
+        },
+        {
+          "to": 65,
+          "type": "taxi"
+        }
+      ]
+    },
+    "36": {
+      "id": 36,
+      "x": 1358,
+      "y": 617,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 35,
+          "type": "taxi"
+        },
+        {
+          "to": 37,
+          "type": "taxi"
+        },
+        {
+          "to": 49,
+          "type": "taxi"
+        }
+      ]
+    },
+    "37": {
+      "id": 37,
+      "x": 1469,
+      "y": 524,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 23,
+          "type": "taxi"
+        },
+        {
+          "to": 24,
+          "type": "taxi"
+        },
+        {
+          "to": 36,
+          "type": "taxi"
+        },
+        {
+          "to": 50,
+          "type": "taxi"
+        }
+      ]
+    },
+    "38": {
+      "id": 38,
+      "x": 1724,
+      "y": 552,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 24,
+          "type": "taxi"
+        },
+        {
+          "to": 25,
+          "type": "taxi"
+        },
+        {
+          "to": 50,
+          "type": "taxi"
+        },
+        {
+          "to": 51,
+          "type": "taxi"
+        }
+      ]
+    },
+    "39": {
+      "id": 39,
+      "x": 1873,
+      "y": 512,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 25,
+          "type": "taxi"
+        },
+        {
+          "to": 26,
+          "type": "taxi"
+        },
+        {
+          "to": 51,
+          "type": "taxi"
+        },
+        {
+          "to": 52,
+          "type": "taxi"
+        }
+      ]
+    },
+    "40": {
+      "id": 40,
+      "x": 2073,
+      "y": 616,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 27,
+          "type": "taxi"
+        },
+        {
+          "to": 41,
+          "type": "taxi"
+        },
+        {
+          "to": 52,
+          "type": "taxi"
+        },
+        {
+          "to": 53,
+          "type": "taxi"
+        }
+      ]
+    },
+    "41": {
+      "id": 41,
+      "x": 2154,
+      "y": 583,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 15,
+          "type": "bus"
+        },
+        {
+          "to": 28,
+          "type": "taxi"
+        },
+        {
+          "to": 29,
+          "type": "bus"
+        },
+        {
+          "to": 29,
+          "type": "taxi"
+        },
+        {
+          "to": 40,
+          "type": "taxi"
+        },
+        {
+          "to": 52,
+          "type": "bus"
+        },
+        {
+          "to": 54,
+          "type": "taxi"
+        },
+        {
+          "to": 87,
+          "type": "bus"
+        }
+      ]
+    },
+    "42": {
+      "id": 42,
+      "x": 2641,
+      "y": 600,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 7,
+          "type": "bus"
+        },
+        {
+          "to": 29,
+          "type": "bus"
+        },
+        {
+          "to": 29,
+          "type": "taxi"
+        },
+        {
+          "to": 30,
+          "type": "taxi"
+        },
+        {
+          "to": 56,
+          "type": "taxi"
+        },
+        {
+          "to": 72,
+          "type": "bus"
+        },
+        {
+          "to": 72,
+          "type": "taxi"
+        }
+      ]
+    },
+    "43": {
+      "id": 43,
+      "x": 157,
+      "y": 569,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 18,
+          "type": "taxi"
+        },
+        {
+          "to": 31,
+          "type": "taxi"
+        },
+        {
+          "to": 57,
+          "type": "taxi"
+        }
+      ]
+    },
+    "44": {
+      "id": 44,
+      "x": 416,
+      "y": 634,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 31,
+          "type": "taxi"
+        },
+        {
+          "to": 32,
+          "type": "taxi"
+        },
+        {
+          "to": 58,
+          "type": "taxi"
+        }
+      ]
+    },
+    "45": {
+      "id": 45,
+      "x": 618,
+      "y": 668,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 32,
+          "type": "taxi"
+        },
+        {
+          "to": 46,
+          "type": "taxi"
+        },
+        {
+          "to": 58,
+          "type": "taxi"
+        },
+        {
+          "to": 59,
+          "type": "taxi"
+        },
+        {
+          "to": 60,
+          "type": "taxi"
+        }
+      ]
+    },
+    "46": {
+      "id": 46,
+      "x": 773,
+      "y": 630,
+      "types": [
+        "taxi",
+        "bus",
+        "underground"
+      ],
+      "edges": [
+        {
+          "to": 1,
+          "type": "bus"
+        },
+        {
+          "to": 1,
+          "type": "underground"
+        },
+        {
+          "to": 13,
+          "type": "underground"
+        },
+        {
+          "to": 33,
+          "type": "taxi"
+        },
+        {
+          "to": 34,
+          "type": "bus"
+        },
+        {
+          "to": 45,
+          "type": "taxi"
+        },
+        {
+          "to": 47,
+          "type": "taxi"
+        },
+        {
+          "to": 58,
+          "type": "bus"
+        },
+        {
+          "to": 61,
+          "type": "taxi"
+        },
+        {
+          "to": 74,
+          "type": "underground"
+        },
+        {
+          "to": 78,
+          "type": "bus"
+        },
+        {
+          "to": 79,
+          "type": "underground"
+        }
+      ]
+    },
+    "47": {
+      "id": 47,
+      "x": 919,
+      "y": 590,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 34,
+          "type": "taxi"
+        },
+        {
+          "to": 46,
+          "type": "taxi"
+        },
+        {
+          "to": 62,
+          "type": "taxi"
+        }
+      ]
+    },
+    "48": {
+      "id": 48,
+      "x": 1117,
+      "y": 704,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 34,
+          "type": "taxi"
+        },
+        {
+          "to": 35,
+          "type": "taxi"
+        },
+        {
+          "to": 62,
+          "type": "taxi"
+        },
+        {
+          "to": 63,
+          "type": "taxi"
+        }
+      ]
+    },
+    "49": {
+      "id": 49,
+      "x": 1424,
+      "y": 718,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 36,
+          "type": "taxi"
+        },
+        {
+          "to": 50,
+          "type": "taxi"
+        },
+        {
+          "to": 66,
+          "type": "taxi"
+        }
+      ]
+    },
+    "50": {
+      "id": 50,
+      "x": 1548,
+      "y": 643,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 37,
+          "type": "taxi"
+        },
+        {
+          "to": 38,
+          "type": "taxi"
+        },
+        {
+          "to": 49,
+          "type": "taxi"
+        }
+      ]
+    },
+    "51": {
+      "id": 51,
+      "x": 1815,
+      "y": 651,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 38,
+          "type": "taxi"
+        },
+        {
+          "to": 39,
+          "type": "taxi"
+        },
+        {
+          "to": 52,
+          "type": "taxi"
+        },
+        {
+          "to": 67,
+          "type": "taxi"
+        },
+        {
+          "to": 68,
+          "type": "taxi"
+        }
+      ]
+    },
+    "52": {
+      "id": 52,
+      "x": 1963,
+      "y": 618,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 13,
+          "type": "bus"
+        },
+        {
+          "to": 39,
+          "type": "taxi"
+        },
+        {
+          "to": 40,
+          "type": "taxi"
+        },
+        {
+          "to": 41,
+          "type": "bus"
+        },
+        {
+          "to": 51,
+          "type": "taxi"
+        },
+        {
+          "to": 67,
+          "type": "bus"
+        },
+        {
+          "to": 69,
+          "type": "taxi"
+        },
+        {
+          "to": 86,
+          "type": "bus"
+        }
+      ]
+    },
+    "53": {
+      "id": 53,
+      "x": 2075,
+      "y": 716,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 40,
+          "type": "taxi"
+        },
+        {
+          "to": 54,
+          "type": "taxi"
+        },
+        {
+          "to": 69,
+          "type": "taxi"
+        }
+      ]
+    },
+    "54": {
+      "id": 54,
+      "x": 2182,
+      "y": 705,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 41,
+          "type": "taxi"
+        },
+        {
+          "to": 53,
+          "type": "taxi"
+        },
+        {
+          "to": 55,
+          "type": "taxi"
+        },
+        {
+          "to": 70,
+          "type": "taxi"
+        }
+      ]
+    },
+    "55": {
+      "id": 55,
+      "x": 2418,
+      "y": 697,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 29,
+          "type": "bus"
+        },
+        {
+          "to": 54,
+          "type": "taxi"
+        },
+        {
+          "to": 71,
+          "type": "taxi"
+        },
+        {
+          "to": 89,
+          "type": "bus"
+        }
+      ]
+    },
+    "56": {
+      "id": 56,
+      "x": 2720,
+      "y": 718,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 42,
+          "type": "taxi"
+        },
+        {
+          "to": 91,
+          "type": "taxi"
+        }
+      ]
+    },
+    "57": {
+      "id": 57,
+      "x": 277,
+      "y": 710,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 43,
+          "type": "taxi"
+        },
+        {
+          "to": 58,
+          "type": "taxi"
+        },
+        {
+          "to": 73,
+          "type": "taxi"
+        }
+      ]
+    },
+    "58": {
+      "id": 58,
+      "x": 487,
+      "y": 711,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 1,
+          "type": "bus"
+        },
+        {
+          "to": 44,
+          "type": "taxi"
+        },
+        {
+          "to": 45,
+          "type": "taxi"
+        },
+        {
+          "to": 46,
+          "type": "bus"
+        },
+        {
+          "to": 57,
+          "type": "taxi"
+        },
+        {
+          "to": 59,
+          "type": "taxi"
+        },
+        {
+          "to": 74,
+          "type": "bus"
+        },
+        {
+          "to": 74,
+          "type": "taxi"
+        },
+        {
+          "to": 75,
+          "type": "taxi"
+        },
+        {
+          "to": 77,
+          "type": "bus"
+        }
+      ]
+    },
+    "59": {
+      "id": 59,
+      "x": 545,
+      "y": 779,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 45,
+          "type": "taxi"
+        },
+        {
+          "to": 58,
+          "type": "taxi"
+        },
+        {
+          "to": 75,
+          "type": "taxi"
+        },
+        {
+          "to": 76,
+          "type": "taxi"
+        }
+      ]
+    },
+    "60": {
+      "id": 60,
+      "x": 651,
+      "y": 765,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 45,
+          "type": "taxi"
+        },
+        {
+          "to": 61,
+          "type": "taxi"
+        },
+        {
+          "to": 76,
+          "type": "taxi"
+        }
+      ]
+    },
+    "61": {
+      "id": 61,
+      "x": 829,
+      "y": 808,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 46,
+          "type": "taxi"
+        },
+        {
+          "to": 60,
+          "type": "taxi"
+        },
+        {
+          "to": 62,
+          "type": "taxi"
+        },
+        {
+          "to": 76,
+          "type": "taxi"
+        },
+        {
+          "to": 78,
+          "type": "taxi"
+        }
+      ]
+    },
+    "62": {
+      "id": 62,
+      "x": 916,
+      "y": 784,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 47,
+          "type": "taxi"
+        },
+        {
+          "to": 48,
+          "type": "taxi"
+        },
+        {
+          "to": 61,
+          "type": "taxi"
+        },
+        {
+          "to": 79,
+          "type": "taxi"
+        }
+      ]
+    },
+    "63": {
+      "id": 63,
+      "x": 1142,
+      "y": 885,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 34,
+          "type": "bus"
+        },
+        {
+          "to": 48,
+          "type": "taxi"
+        },
+        {
+          "to": 64,
+          "type": "taxi"
+        },
+        {
+          "to": 65,
+          "type": "bus"
+        },
+        {
+          "to": 79,
+          "type": "bus"
+        },
+        {
+          "to": 79,
+          "type": "taxi"
+        },
+        {
+          "to": 80,
+          "type": "taxi"
+        },
+        {
+          "to": 100,
+          "type": "bus"
+        }
+      ]
+    },
+    "64": {
+      "id": 64,
+      "x": 1280,
+      "y": 862,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 63,
+          "type": "taxi"
+        },
+        {
+          "to": 65,
+          "type": "taxi"
+        },
+        {
+          "to": 81,
+          "type": "taxi"
+        }
+      ]
+    },
+    "65": {
+      "id": 65,
+      "x": 1408,
+      "y": 852,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 22,
+          "type": "bus"
+        },
+        {
+          "to": 35,
+          "type": "taxi"
+        },
+        {
+          "to": 63,
+          "type": "bus"
+        },
+        {
+          "to": 64,
+          "type": "taxi"
+        },
+        {
+          "to": 66,
+          "type": "taxi"
+        },
+        {
+          "to": 67,
+          "type": "bus"
+        },
+        {
+          "to": 82,
+          "type": "bus"
+        },
+        {
+          "to": 82,
+          "type": "taxi"
+        }
+      ]
+    },
+    "66": {
+      "id": 66,
+      "x": 1502,
+      "y": 824,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 49,
+          "type": "taxi"
+        },
+        {
+          "to": 65,
+          "type": "taxi"
+        },
+        {
+          "to": 67,
+          "type": "taxi"
+        },
+        {
+          "to": 82,
+          "type": "taxi"
+        }
+      ]
+    },
+    "67": {
+      "id": 67,
+      "x": 1642,
+      "y": 799,
+      "types": [
+        "taxi",
+        "bus",
+        "underground"
+      ],
+      "edges": [
+        {
+          "to": 13,
+          "type": "underground"
+        },
+        {
+          "to": 23,
+          "type": "bus"
+        },
+        {
+          "to": 51,
+          "type": "taxi"
+        },
+        {
+          "to": 52,
+          "type": "bus"
+        },
+        {
+          "to": 65,
+          "type": "bus"
+        },
+        {
+          "to": 66,
+          "type": "taxi"
+        },
+        {
+          "to": 68,
+          "type": "taxi"
+        },
+        {
+          "to": 79,
+          "type": "underground"
+        },
+        {
+          "to": 82,
+          "type": "bus"
+        },
+        {
+          "to": 84,
+          "type": "taxi"
+        },
+        {
+          "to": 89,
+          "type": "underground"
+        },
+        {
+          "to": 102,
+          "type": "bus"
+        },
+        {
+          "to": 111,
+          "type": "underground"
+        }
+      ]
+    },
+    "68": {
+      "id": 68,
+      "x": 1840,
+      "y": 780,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 51,
+          "type": "taxi"
+        },
+        {
+          "to": 67,
+          "type": "taxi"
+        },
+        {
+          "to": 69,
+          "type": "taxi"
+        },
+        {
+          "to": 85,
+          "type": "taxi"
+        }
+      ]
+    },
+    "69": {
+      "id": 69,
+      "x": 1996,
+      "y": 767,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 52,
+          "type": "taxi"
+        },
+        {
+          "to": 53,
+          "type": "taxi"
+        },
+        {
+          "to": 68,
+          "type": "taxi"
+        },
+        {
+          "to": 86,
+          "type": "taxi"
+        }
+      ]
+    },
+    "70": {
+      "id": 70,
+      "x": 2194,
+      "y": 812,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 54,
+          "type": "taxi"
+        },
+        {
+          "to": 71,
+          "type": "taxi"
+        },
+        {
+          "to": 87,
+          "type": "taxi"
+        }
+      ]
+    },
+    "71": {
+      "id": 71,
+      "x": 2385,
+      "y": 810,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 55,
+          "type": "taxi"
+        },
+        {
+          "to": 70,
+          "type": "taxi"
+        },
+        {
+          "to": 72,
+          "type": "taxi"
+        },
+        {
+          "to": 89,
+          "type": "taxi"
+        }
+      ]
+    },
+    "72": {
+      "id": 72,
+      "x": 2574,
+      "y": 826,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 42,
+          "type": "bus"
+        },
+        {
+          "to": 42,
+          "type": "taxi"
+        },
+        {
+          "to": 71,
+          "type": "taxi"
+        },
+        {
+          "to": 90,
+          "type": "taxi"
+        },
+        {
+          "to": 91,
+          "type": "taxi"
+        },
+        {
+          "to": 105,
+          "type": "bus"
+        },
+        {
+          "to": 107,
+          "type": "bus"
+        }
+      ]
+    },
+    "73": {
+      "id": 73,
+      "x": 242,
+      "y": 785,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 57,
+          "type": "taxi"
+        },
+        {
+          "to": 74,
+          "type": "taxi"
+        },
+        {
+          "to": 92,
+          "type": "taxi"
+        }
+      ]
+    },
+    "74": {
+      "id": 74,
+      "x": 333,
+      "y": 890,
+      "types": [
+        "taxi",
+        "bus",
+        "underground"
+      ],
+      "edges": [
+        {
+          "to": 46,
+          "type": "underground"
+        },
+        {
+          "to": 58,
+          "type": "bus"
+        },
+        {
+          "to": 58,
+          "type": "taxi"
+        },
+        {
+          "to": 73,
+          "type": "taxi"
+        },
+        {
+          "to": 75,
+          "type": "taxi"
+        },
+        {
+          "to": 92,
+          "type": "taxi"
+        },
+        {
+          "to": 94,
+          "type": "bus"
+        }
+      ]
+    },
+    "75": {
+      "id": 75,
+      "x": 455,
+      "y": 861,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 58,
+          "type": "taxi"
+        },
+        {
+          "to": 59,
+          "type": "taxi"
+        },
+        {
+          "to": 74,
+          "type": "taxi"
+        },
+        {
+          "to": 94,
+          "type": "taxi"
+        }
+      ]
+    },
+    "76": {
+      "id": 76,
+      "x": 622,
+      "y": 867,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 59,
+          "type": "taxi"
+        },
+        {
+          "to": 60,
+          "type": "taxi"
+        },
+        {
+          "to": 61,
+          "type": "taxi"
+        },
+        {
+          "to": 77,
+          "type": "taxi"
+        }
+      ]
+    },
+    "77": {
+      "id": 77,
+      "x": 711,
+      "y": 965,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 58,
+          "type": "bus"
+        },
+        {
+          "to": 76,
+          "type": "taxi"
+        },
+        {
+          "to": 78,
+          "type": "bus"
+        },
+        {
+          "to": 78,
+          "type": "taxi"
+        },
+        {
+          "to": 94,
+          "type": "bus"
+        },
+        {
+          "to": 95,
+          "type": "taxi"
+        },
+        {
+          "to": 96,
+          "type": "taxi"
+        },
+        {
+          "to": 124,
+          "type": "bus"
+        }
+      ]
+    },
+    "78": {
+      "id": 78,
+      "x": 862,
+      "y": 941,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 46,
+          "type": "bus"
+        },
+        {
+          "to": 61,
+          "type": "taxi"
+        },
+        {
+          "to": 77,
+          "type": "bus"
+        },
+        {
+          "to": 77,
+          "type": "taxi"
+        },
+        {
+          "to": 79,
+          "type": "bus"
+        },
+        {
+          "to": 79,
+          "type": "taxi"
+        },
+        {
+          "to": 97,
+          "type": "taxi"
+        }
+      ]
+    },
+    "79": {
+      "id": 79,
+      "x": 958,
+      "y": 931,
+      "types": [
+        "taxi",
+        "bus",
+        "underground"
+      ],
+      "edges": [
+        {
+          "to": 46,
+          "type": "underground"
+        },
+        {
+          "to": 62,
+          "type": "taxi"
+        },
+        {
+          "to": 63,
+          "type": "bus"
+        },
+        {
+          "to": 63,
+          "type": "taxi"
+        },
+        {
+          "to": 67,
+          "type": "underground"
+        },
+        {
+          "to": 78,
+          "type": "bus"
+        },
+        {
+          "to": 78,
+          "type": "taxi"
+        },
+        {
+          "to": 93,
+          "type": "underground"
+        },
+        {
+          "to": 98,
+          "type": "taxi"
+        },
+        {
+          "to": 111,
+          "type": "underground"
+        }
+      ]
+    },
+    "80": {
+      "id": 80,
+      "x": 1168,
+      "y": 974,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 63,
+          "type": "taxi"
+        },
+        {
+          "to": 99,
+          "type": "taxi"
+        },
+        {
+          "to": 100,
+          "type": "taxi"
+        }
+      ]
+    },
+    "81": {
+      "id": 81,
+      "x": 1358,
+      "y": 1020,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 64,
+          "type": "taxi"
+        },
+        {
+          "to": 82,
+          "type": "taxi"
+        },
+        {
+          "to": 100,
+          "type": "taxi"
+        }
+      ]
+    },
+    "82": {
+      "id": 82,
+      "x": 1439,
+      "y": 968,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 65,
+          "type": "bus"
+        },
+        {
+          "to": 65,
+          "type": "taxi"
+        },
+        {
+          "to": 66,
+          "type": "taxi"
+        },
+        {
+          "to": 67,
+          "type": "bus"
+        },
+        {
+          "to": 81,
+          "type": "taxi"
+        },
+        {
+          "to": 100,
+          "type": "bus"
+        },
+        {
+          "to": 101,
+          "type": "taxi"
+        },
+        {
+          "to": 140,
+          "type": "bus"
+        }
+      ]
+    },
+    "83": {
+      "id": 83,
+      "x": 1605,
+      "y": 915,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 101,
+          "type": "taxi"
+        },
+        {
+          "to": 102,
+          "type": "taxi"
+        }
+      ]
+    },
+    "84": {
+      "id": 84,
+      "x": 1714,
+      "y": 892,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 67,
+          "type": "taxi"
+        },
+        {
+          "to": 85,
+          "type": "taxi"
+        }
+      ]
+    },
+    "85": {
+      "id": 85,
+      "x": 1838,
+      "y": 853,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 68,
+          "type": "taxi"
+        },
+        {
+          "to": 84,
+          "type": "taxi"
+        },
+        {
+          "to": 103,
+          "type": "taxi"
+        }
+      ]
+    },
+    "86": {
+      "id": 86,
+      "x": 2019,
+      "y": 934,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 52,
+          "type": "bus"
+        },
+        {
+          "to": 69,
+          "type": "taxi"
+        },
+        {
+          "to": 87,
+          "type": "bus"
+        },
+        {
+          "to": 102,
+          "type": "bus"
+        },
+        {
+          "to": 103,
+          "type": "taxi"
+        },
+        {
+          "to": 104,
+          "type": "taxi"
+        },
+        {
+          "to": 116,
+          "type": "bus"
+        }
+      ]
+    },
+    "87": {
+      "id": 87,
+      "x": 2208,
+      "y": 981,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 41,
+          "type": "bus"
+        },
+        {
+          "to": 70,
+          "type": "taxi"
+        },
+        {
+          "to": 86,
+          "type": "bus"
+        },
+        {
+          "to": 88,
+          "type": "taxi"
+        },
+        {
+          "to": 105,
+          "type": "bus"
+        }
+      ]
+    },
+    "88": {
+      "id": 88,
+      "x": 2278,
+      "y": 999,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 87,
+          "type": "taxi"
+        },
+        {
+          "to": 89,
+          "type": "taxi"
+        },
+        {
+          "to": 117,
+          "type": "taxi"
+        }
+      ]
+    },
+    "89": {
+      "id": 89,
+      "x": 2375,
+      "y": 956,
+      "types": [
+        "taxi",
+        "bus",
+        "underground"
+      ],
+      "edges": [
+        {
+          "to": 13,
+          "type": "underground"
+        },
+        {
+          "to": 55,
+          "type": "bus"
+        },
+        {
+          "to": 67,
+          "type": "underground"
+        },
+        {
+          "to": 71,
+          "type": "taxi"
+        },
+        {
+          "to": 88,
+          "type": "taxi"
+        },
+        {
+          "to": 105,
+          "type": "bus"
+        },
+        {
+          "to": 105,
+          "type": "taxi"
+        },
+        {
+          "to": 128,
+          "type": "underground"
+        },
+        {
+          "to": 140,
+          "type": "underground"
+        }
+      ]
+    },
+    "90": {
+      "id": 90,
+      "x": 2493,
+      "y": 962,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 72,
+          "type": "taxi"
+        },
+        {
+          "to": 91,
+          "type": "taxi"
+        },
+        {
+          "to": 105,
+          "type": "taxi"
+        }
+      ]
+    },
+    "91": {
+      "id": 91,
+      "x": 2686,
+      "y": 944,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 56,
+          "type": "taxi"
+        },
+        {
+          "to": 72,
+          "type": "taxi"
+        },
+        {
+          "to": 90,
+          "type": "taxi"
+        },
+        {
+          "to": 105,
+          "type": "taxi"
+        },
+        {
+          "to": 107,
+          "type": "taxi"
+        }
+      ]
+    },
+    "92": {
+      "id": 92,
+      "x": 174,
+      "y": 1000,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 73,
+          "type": "taxi"
+        },
+        {
+          "to": 74,
+          "type": "taxi"
+        },
+        {
+          "to": 93,
+          "type": "taxi"
+        }
+      ]
+    },
+    "93": {
+      "id": 93,
+      "x": 180,
+      "y": 1058,
+      "types": [
+        "taxi",
+        "bus",
+        "underground"
+      ],
+      "edges": [
+        {
+          "to": 79,
+          "type": "underground"
+        },
+        {
+          "to": 92,
+          "type": "taxi"
+        },
+        {
+          "to": 94,
+          "type": "bus"
+        },
+        {
+          "to": 94,
+          "type": "taxi"
+        }
+      ]
+    },
+    "94": {
+      "id": 94,
+      "x": 340,
+      "y": 1023,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 74,
+          "type": "bus"
+        },
+        {
+          "to": 75,
+          "type": "taxi"
+        },
+        {
+          "to": 77,
+          "type": "bus"
+        },
+        {
+          "to": 93,
+          "type": "bus"
+        },
+        {
+          "to": 93,
+          "type": "taxi"
+        },
+        {
+          "to": 95,
+          "type": "taxi"
+        }
+      ]
+    },
+    "95": {
+      "id": 95,
+      "x": 428,
+      "y": 1009,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 77,
+          "type": "taxi"
+        },
+        {
+          "to": 94,
+          "type": "taxi"
+        },
+        {
+          "to": 122,
+          "type": "taxi"
+        }
+      ]
+    },
+    "96": {
+      "id": 96,
+      "x": 802,
+      "y": 1087,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 77,
+          "type": "taxi"
+        },
+        {
+          "to": 97,
+          "type": "taxi"
+        },
+        {
+          "to": 109,
+          "type": "taxi"
+        }
+      ]
+    },
+    "97": {
+      "id": 97,
+      "x": 890,
+      "y": 1060,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 78,
+          "type": "taxi"
+        },
+        {
+          "to": 96,
+          "type": "taxi"
+        },
+        {
+          "to": 98,
+          "type": "taxi"
+        },
+        {
+          "to": 109,
+          "type": "taxi"
+        }
+      ]
+    },
+    "98": {
+      "id": 98,
+      "x": 1002,
+      "y": 1024,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 79,
+          "type": "taxi"
+        },
+        {
+          "to": 97,
+          "type": "taxi"
+        },
+        {
+          "to": 99,
+          "type": "taxi"
+        },
+        {
+          "to": 110,
+          "type": "taxi"
+        }
+      ]
+    },
+    "99": {
+      "id": 99,
+      "x": 1109,
+      "y": 1041,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 80,
+          "type": "taxi"
+        },
+        {
+          "to": 98,
+          "type": "taxi"
+        },
+        {
+          "to": 110,
+          "type": "taxi"
+        },
+        {
+          "to": 112,
+          "type": "taxi"
+        }
+      ]
+    },
+    "100": {
+      "id": 100,
+      "x": 1310,
+      "y": 1092,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 63,
+          "type": "bus"
+        },
+        {
+          "to": 80,
+          "type": "taxi"
+        },
+        {
+          "to": 81,
+          "type": "taxi"
+        },
+        {
+          "to": 82,
+          "type": "bus"
+        },
+        {
+          "to": 101,
+          "type": "taxi"
+        },
+        {
+          "to": 111,
+          "type": "bus"
+        },
+        {
+          "to": 112,
+          "type": "taxi"
+        },
+        {
+          "to": 113,
+          "type": "taxi"
+        }
+      ]
+    },
+    "101": {
+      "id": 101,
+      "x": 1474,
+      "y": 1024,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 82,
+          "type": "taxi"
+        },
+        {
+          "to": 83,
+          "type": "taxi"
+        },
+        {
+          "to": 100,
+          "type": "taxi"
+        },
+        {
+          "to": 114,
+          "type": "taxi"
+        }
+      ]
+    },
+    "102": {
+      "id": 102,
+      "x": 1711,
+      "y": 965,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 67,
+          "type": "bus"
+        },
+        {
+          "to": 83,
+          "type": "taxi"
+        },
+        {
+          "to": 86,
+          "type": "bus"
+        },
+        {
+          "to": 103,
+          "type": "taxi"
+        },
+        {
+          "to": 115,
+          "type": "taxi"
+        },
+        {
+          "to": 127,
+          "type": "bus"
+        }
+      ]
+    },
+    "103": {
+      "id": 103,
+      "x": 1855,
+      "y": 945,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 85,
+          "type": "taxi"
+        },
+        {
+          "to": 86,
+          "type": "taxi"
+        },
+        {
+          "to": 102,
+          "type": "taxi"
+        }
+      ]
+    },
+    "104": {
+      "id": 104,
+      "x": 2023,
+      "y": 1015,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 86,
+          "type": "taxi"
+        },
+        {
+          "to": 116,
+          "type": "taxi"
+        }
+      ]
+    },
+    "105": {
+      "id": 105,
+      "x": 2430,
+      "y": 1056,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 72,
+          "type": "bus"
+        },
+        {
+          "to": 87,
+          "type": "bus"
+        },
+        {
+          "to": 89,
+          "type": "bus"
+        },
+        {
+          "to": 89,
+          "type": "taxi"
+        },
+        {
+          "to": 90,
+          "type": "taxi"
+        },
+        {
+          "to": 91,
+          "type": "taxi"
+        },
+        {
+          "to": 106,
+          "type": "taxi"
+        },
+        {
+          "to": 107,
+          "type": "bus"
+        },
+        {
+          "to": 108,
+          "type": "bus"
+        },
+        {
+          "to": 108,
+          "type": "taxi"
+        }
+      ]
+    },
+    "106": {
+      "id": 106,
+      "x": 2614,
+      "y": 1098,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 105,
+          "type": "taxi"
+        },
+        {
+          "to": 107,
+          "type": "taxi"
+        }
+      ]
+    },
+    "107": {
+      "id": 107,
+      "x": 2721,
+      "y": 1094,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 72,
+          "type": "bus"
+        },
+        {
+          "to": 91,
+          "type": "taxi"
+        },
+        {
+          "to": 105,
+          "type": "bus"
+        },
+        {
+          "to": 106,
+          "type": "taxi"
+        },
+        {
+          "to": 119,
+          "type": "taxi"
+        },
+        {
+          "to": 161,
+          "type": "bus"
+        }
+      ]
+    },
+    "108": {
+      "id": 108,
+      "x": 2387,
+      "y": 1224,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 105,
+          "type": "bus"
+        },
+        {
+          "to": 105,
+          "type": "taxi"
+        },
+        {
+          "to": 115,
+          "type": "water"
+        },
+        {
+          "to": 116,
+          "type": "bus"
+        },
+        {
+          "to": 117,
+          "type": "taxi"
+        },
+        {
+          "to": 119,
+          "type": "taxi"
+        },
+        {
+          "to": 135,
+          "type": "bus"
+        }
+      ]
+    },
+    "109": {
+      "id": 109,
+      "x": 929,
+      "y": 1230,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 96,
+          "type": "taxi"
+        },
+        {
+          "to": 97,
+          "type": "taxi"
+        },
+        {
+          "to": 110,
+          "type": "taxi"
+        },
+        {
+          "to": 124,
+          "type": "taxi"
+        }
+      ]
+    },
+    "110": {
+      "id": 110,
+      "x": 1063,
+      "y": 1103,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 98,
+          "type": "taxi"
+        },
+        {
+          "to": 99,
+          "type": "taxi"
+        },
+        {
+          "to": 109,
+          "type": "taxi"
+        },
+        {
+          "to": 111,
+          "type": "taxi"
+        }
+      ]
+    },
+    "111": {
+      "id": 111,
+      "x": 1129,
+      "y": 1195,
+      "types": [
+        "taxi",
+        "bus",
+        "underground"
+      ],
+      "edges": [
+        {
+          "to": 67,
+          "type": "underground"
+        },
+        {
+          "to": 79,
+          "type": "underground"
+        },
+        {
+          "to": 100,
+          "type": "bus"
+        },
+        {
+          "to": 110,
+          "type": "taxi"
+        },
+        {
+          "to": 112,
+          "type": "taxi"
+        },
+        {
+          "to": 124,
+          "type": "bus"
+        },
+        {
+          "to": 124,
+          "type": "taxi"
+        },
+        {
+          "to": 153,
+          "type": "underground"
+        },
+        {
+          "to": 163,
+          "type": "underground"
+        }
+      ]
+    },
+    "112": {
+      "id": 112,
+      "x": 1184,
+      "y": 1163,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 99,
+          "type": "taxi"
+        },
+        {
+          "to": 100,
+          "type": "taxi"
+        },
+        {
+          "to": 111,
+          "type": "taxi"
+        },
+        {
+          "to": 125,
+          "type": "taxi"
+        }
+      ]
+    },
+    "113": {
+      "id": 113,
+      "x": 1355,
+      "y": 1189,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 100,
+          "type": "taxi"
+        },
+        {
+          "to": 114,
+          "type": "taxi"
+        },
+        {
+          "to": 125,
+          "type": "taxi"
+        }
+      ]
+    },
+    "114": {
+      "id": 114,
+      "x": 1487,
+      "y": 1171,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 101,
+          "type": "taxi"
+        },
+        {
+          "to": 113,
+          "type": "taxi"
+        },
+        {
+          "to": 115,
+          "type": "taxi"
+        },
+        {
+          "to": 126,
+          "type": "taxi"
+        },
+        {
+          "to": 131,
+          "type": "taxi"
+        },
+        {
+          "to": 132,
+          "type": "taxi"
+        }
+      ]
+    },
+    "115": {
+      "id": 115,
+      "x": 1699,
+      "y": 1084,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 102,
+          "type": "taxi"
+        },
+        {
+          "to": 108,
+          "type": "water"
+        },
+        {
+          "to": 114,
+          "type": "taxi"
+        },
+        {
+          "to": 126,
+          "type": "taxi"
+        },
+        {
+          "to": 127,
+          "type": "taxi"
+        },
+        {
+          "to": 157,
+          "type": "water"
+        }
+      ]
+    },
+    "116": {
+      "id": 116,
+      "x": 2013,
+      "y": 1197,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 86,
+          "type": "bus"
+        },
+        {
+          "to": 104,
+          "type": "taxi"
+        },
+        {
+          "to": 108,
+          "type": "bus"
+        },
+        {
+          "to": 117,
+          "type": "taxi"
+        },
+        {
+          "to": 118,
+          "type": "taxi"
+        },
+        {
+          "to": 127,
+          "type": "bus"
+        },
+        {
+          "to": 127,
+          "type": "taxi"
+        },
+        {
+          "to": 142,
+          "type": "bus"
+        }
+      ]
+    },
+    "117": {
+      "id": 117,
+      "x": 2222,
+      "y": 1266,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 88,
+          "type": "taxi"
+        },
+        {
+          "to": 108,
+          "type": "taxi"
+        },
+        {
+          "to": 116,
+          "type": "taxi"
+        },
+        {
+          "to": 129,
+          "type": "taxi"
+        }
+      ]
+    },
+    "118": {
+      "id": 118,
+      "x": 2009,
+      "y": 1324,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 116,
+          "type": "taxi"
+        },
+        {
+          "to": 129,
+          "type": "taxi"
+        },
+        {
+          "to": 134,
+          "type": "taxi"
+        },
+        {
+          "to": 142,
+          "type": "taxi"
+        }
+      ]
+    },
+    "119": {
+      "id": 119,
+      "x": 2659,
+      "y": 1349,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 107,
+          "type": "taxi"
+        },
+        {
+          "to": 108,
+          "type": "taxi"
+        },
+        {
+          "to": 136,
+          "type": "taxi"
+        }
+      ]
+    },
+    "120": {
+      "id": 120,
+      "x": 149,
+      "y": 1398,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 121,
+          "type": "taxi"
+        },
+        {
+          "to": 144,
+          "type": "taxi"
+        }
+      ]
+    },
+    "121": {
+      "id": 121,
+      "x": 240,
+      "y": 1400,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 120,
+          "type": "taxi"
+        },
+        {
+          "to": 122,
+          "type": "taxi"
+        },
+        {
+          "to": 145,
+          "type": "taxi"
+        }
+      ]
+    },
+    "122": {
+      "id": 122,
+      "x": 379,
+      "y": 1380,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 95,
+          "type": "taxi"
+        },
+        {
+          "to": 121,
+          "type": "taxi"
+        },
+        {
+          "to": 123,
+          "type": "bus"
+        },
+        {
+          "to": 123,
+          "type": "taxi"
+        },
+        {
+          "to": 144,
+          "type": "bus"
+        },
+        {
+          "to": 146,
+          "type": "taxi"
+        }
+      ]
+    },
+    "123": {
+      "id": 123,
+      "x": 704,
+      "y": 1368,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 122,
+          "type": "bus"
+        },
+        {
+          "to": 122,
+          "type": "taxi"
+        },
+        {
+          "to": 124,
+          "type": "bus"
+        },
+        {
+          "to": 124,
+          "type": "taxi"
+        },
+        {
+          "to": 137,
+          "type": "taxi"
+        },
+        {
+          "to": 144,
+          "type": "bus"
+        },
+        {
+          "to": 148,
+          "type": "taxi"
+        },
+        {
+          "to": 149,
+          "type": "taxi"
+        },
+        {
+          "to": 165,
+          "type": "bus"
+        }
+      ]
+    },
+    "124": {
+      "id": 124,
+      "x": 886,
+      "y": 1326,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 77,
+          "type": "bus"
+        },
+        {
+          "to": 109,
+          "type": "taxi"
+        },
+        {
+          "to": 111,
+          "type": "bus"
+        },
+        {
+          "to": 111,
+          "type": "taxi"
+        },
+        {
+          "to": 123,
+          "type": "bus"
+        },
+        {
+          "to": 123,
+          "type": "taxi"
+        },
+        {
+          "to": 130,
+          "type": "taxi"
+        },
+        {
+          "to": 138,
+          "type": "taxi"
+        },
+        {
+          "to": 153,
+          "type": "bus"
+        }
+      ]
+    },
+    "125": {
+      "id": 125,
+      "x": 1235,
+      "y": 1258,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 112,
+          "type": "taxi"
+        },
+        {
+          "to": 113,
+          "type": "taxi"
+        },
+        {
+          "to": 131,
+          "type": "taxi"
+        }
+      ]
+    },
+    "126": {
+      "id": 126,
+      "x": 1596,
+      "y": 1199,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 114,
+          "type": "taxi"
+        },
+        {
+          "to": 115,
+          "type": "taxi"
+        },
+        {
+          "to": 127,
+          "type": "taxi"
+        },
+        {
+          "to": 140,
+          "type": "taxi"
+        }
+      ]
+    },
+    "127": {
+      "id": 127,
+      "x": 1801,
+      "y": 1277,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 102,
+          "type": "bus"
+        },
+        {
+          "to": 115,
+          "type": "taxi"
+        },
+        {
+          "to": 116,
+          "type": "bus"
+        },
+        {
+          "to": 116,
+          "type": "taxi"
+        },
+        {
+          "to": 126,
+          "type": "taxi"
+        },
+        {
+          "to": 133,
+          "type": "bus"
+        },
+        {
+          "to": 133,
+          "type": "taxi"
+        },
+        {
+          "to": 134,
+          "type": "taxi"
+        }
+      ]
+    },
+    "128": {
+      "id": 128,
+      "x": 2102,
+      "y": 1633,
+      "types": [
+        "taxi",
+        "bus",
+        "underground"
+      ],
+      "edges": [
+        {
+          "to": 89,
+          "type": "underground"
+        },
+        {
+          "to": 135,
+          "type": "bus"
+        },
+        {
+          "to": 140,
+          "type": "underground"
+        },
+        {
+          "to": 142,
+          "type": "bus"
+        },
+        {
+          "to": 142,
+          "type": "taxi"
+        },
+        {
+          "to": 143,
+          "type": "taxi"
+        },
+        {
+          "to": 160,
+          "type": "taxi"
+        },
+        {
+          "to": 161,
+          "type": "bus"
+        },
+        {
+          "to": 172,
+          "type": "taxi"
+        },
+        {
+          "to": 185,
+          "type": "underground"
+        },
+        {
+          "to": 187,
+          "type": "bus"
+        },
+        {
+          "to": 188,
+          "type": "taxi"
+        },
+        {
+          "to": 199,
+          "type": "bus"
+        }
+      ]
+    },
+    "129": {
+      "id": 129,
+      "x": 2203,
+      "y": 1338,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 117,
+          "type": "taxi"
+        },
+        {
+          "to": 118,
+          "type": "taxi"
+        },
+        {
+          "to": 135,
+          "type": "taxi"
+        },
+        {
+          "to": 142,
+          "type": "taxi"
+        },
+        {
+          "to": 143,
+          "type": "taxi"
+        }
+      ]
+    },
+    "130": {
+      "id": 130,
+      "x": 1174,
+      "y": 1377,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 124,
+          "type": "taxi"
+        },
+        {
+          "to": 131,
+          "type": "taxi"
+        },
+        {
+          "to": 139,
+          "type": "taxi"
+        }
+      ]
+    },
+    "131": {
+      "id": 131,
+      "x": 1280,
+      "y": 1316,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 114,
+          "type": "taxi"
+        },
+        {
+          "to": 125,
+          "type": "taxi"
+        },
+        {
+          "to": 130,
+          "type": "taxi"
+        }
+      ]
+    },
+    "132": {
+      "id": 132,
+      "x": 1505,
+      "y": 1316,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 114,
+          "type": "taxi"
+        },
+        {
+          "to": 140,
+          "type": "taxi"
+        }
+      ]
+    },
+    "133": {
+      "id": 133,
+      "x": 1714,
+      "y": 1427,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 127,
+          "type": "bus"
+        },
+        {
+          "to": 127,
+          "type": "taxi"
+        },
+        {
+          "to": 140,
+          "type": "bus"
+        },
+        {
+          "to": 140,
+          "type": "taxi"
+        },
+        {
+          "to": 141,
+          "type": "taxi"
+        },
+        {
+          "to": 157,
+          "type": "bus"
+        }
+      ]
+    },
+    "134": {
+      "id": 134,
+      "x": 1888,
+      "y": 1374,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 118,
+          "type": "taxi"
+        },
+        {
+          "to": 127,
+          "type": "taxi"
+        },
+        {
+          "to": 141,
+          "type": "taxi"
+        },
+        {
+          "to": 142,
+          "type": "taxi"
+        }
+      ]
+    },
+    "135": {
+      "id": 135,
+      "x": 2286,
+      "y": 1402,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 108,
+          "type": "bus"
+        },
+        {
+          "to": 128,
+          "type": "bus"
+        },
+        {
+          "to": 129,
+          "type": "taxi"
+        },
+        {
+          "to": 136,
+          "type": "taxi"
+        },
+        {
+          "to": 143,
+          "type": "taxi"
+        },
+        {
+          "to": 161,
+          "type": "bus"
+        },
+        {
+          "to": 161,
+          "type": "taxi"
+        }
+      ]
+    },
+    "136": {
+      "id": 136,
+      "x": 2591,
+      "y": 1533,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 119,
+          "type": "taxi"
+        },
+        {
+          "to": 135,
+          "type": "taxi"
+        },
+        {
+          "to": 162,
+          "type": "taxi"
+        }
+      ]
+    },
+    "137": {
+      "id": 137,
+      "x": 604,
+      "y": 1499,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 123,
+          "type": "taxi"
+        },
+        {
+          "to": 147,
+          "type": "taxi"
+        }
+      ]
+    },
+    "138": {
+      "id": 138,
+      "x": 956,
+      "y": 1434,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 124,
+          "type": "taxi"
+        },
+        {
+          "to": 150,
+          "type": "taxi"
+        },
+        {
+          "to": 152,
+          "type": "taxi"
+        }
+      ]
+    },
+    "139": {
+      "id": 139,
+      "x": 1166,
+      "y": 1450,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 130,
+          "type": "taxi"
+        },
+        {
+          "to": 140,
+          "type": "taxi"
+        },
+        {
+          "to": 153,
+          "type": "taxi"
+        },
+        {
+          "to": 154,
+          "type": "taxi"
+        }
+      ]
+    },
+    "140": {
+      "id": 140,
+      "x": 1508,
+      "y": 1425,
+      "types": [
+        "taxi",
+        "bus",
+        "underground"
+      ],
+      "edges": [
+        {
+          "to": 82,
+          "type": "bus"
+        },
+        {
+          "to": 89,
+          "type": "underground"
+        },
+        {
+          "to": 126,
+          "type": "taxi"
+        },
+        {
+          "to": 128,
+          "type": "underground"
+        },
+        {
+          "to": 132,
+          "type": "taxi"
+        },
+        {
+          "to": 133,
+          "type": "bus"
+        },
+        {
+          "to": 133,
+          "type": "taxi"
+        },
+        {
+          "to": 139,
+          "type": "taxi"
+        },
+        {
+          "to": 153,
+          "type": "underground"
+        },
+        {
+          "to": 154,
+          "type": "bus"
+        },
+        {
+          "to": 154,
+          "type": "taxi"
+        },
+        {
+          "to": 156,
+          "type": "bus"
+        },
+        {
+          "to": 156,
+          "type": "taxi"
+        }
+      ]
+    },
+    "141": {
+      "id": 141,
+      "x": 1783,
+      "y": 1466,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 133,
+          "type": "taxi"
+        },
+        {
+          "to": 134,
+          "type": "taxi"
+        },
+        {
+          "to": 142,
+          "type": "taxi"
+        },
+        {
+          "to": 158,
+          "type": "taxi"
+        }
+      ]
+    },
+    "142": {
+      "id": 142,
+      "x": 2002,
+      "y": 1510,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 116,
+          "type": "bus"
+        },
+        {
+          "to": 118,
+          "type": "taxi"
+        },
+        {
+          "to": 128,
+          "type": "bus"
+        },
+        {
+          "to": 128,
+          "type": "taxi"
+        },
+        {
+          "to": 129,
+          "type": "taxi"
+        },
+        {
+          "to": 134,
+          "type": "taxi"
+        },
+        {
+          "to": 141,
+          "type": "taxi"
+        },
+        {
+          "to": 143,
+          "type": "taxi"
+        },
+        {
+          "to": 157,
+          "type": "bus"
+        },
+        {
+          "to": 158,
+          "type": "taxi"
+        }
+      ]
+    },
+    "143": {
+      "id": 143,
+      "x": 2189,
+      "y": 1479,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 128,
+          "type": "taxi"
+        },
+        {
+          "to": 129,
+          "type": "taxi"
+        },
+        {
+          "to": 135,
+          "type": "taxi"
+        },
+        {
+          "to": 142,
+          "type": "taxi"
+        },
+        {
+          "to": 160,
+          "type": "taxi"
+        }
+      ]
+    },
+    "144": {
+      "id": 144,
+      "x": 185,
+      "y": 1641,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 120,
+          "type": "taxi"
+        },
+        {
+          "to": 122,
+          "type": "bus"
+        },
+        {
+          "to": 123,
+          "type": "bus"
+        },
+        {
+          "to": 145,
+          "type": "taxi"
+        },
+        {
+          "to": 163,
+          "type": "bus"
+        },
+        {
+          "to": 177,
+          "type": "taxi"
+        }
+      ]
+    },
+    "145": {
+      "id": 145,
+      "x": 276,
+      "y": 1628,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 121,
+          "type": "taxi"
+        },
+        {
+          "to": 144,
+          "type": "taxi"
+        },
+        {
+          "to": 146,
+          "type": "taxi"
+        }
+      ]
+    },
+    "146": {
+      "id": 146,
+      "x": 396,
+      "y": 1615,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 122,
+          "type": "taxi"
+        },
+        {
+          "to": 145,
+          "type": "taxi"
+        },
+        {
+          "to": 147,
+          "type": "taxi"
+        },
+        {
+          "to": 163,
+          "type": "taxi"
+        }
+      ]
+    },
+    "147": {
+      "id": 147,
+      "x": 496,
+      "y": 1586,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 137,
+          "type": "taxi"
+        },
+        {
+          "to": 146,
+          "type": "taxi"
+        },
+        {
+          "to": 164,
+          "type": "taxi"
+        }
+      ]
+    },
+    "148": {
+      "id": 148,
+      "x": 631,
+      "y": 1564,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 123,
+          "type": "taxi"
+        },
+        {
+          "to": 149,
+          "type": "taxi"
+        },
+        {
+          "to": 164,
+          "type": "taxi"
+        }
+      ]
+    },
+    "149": {
+      "id": 149,
+      "x": 745,
+      "y": 1562,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 123,
+          "type": "taxi"
+        },
+        {
+          "to": 148,
+          "type": "taxi"
+        },
+        {
+          "to": 150,
+          "type": "taxi"
+        },
+        {
+          "to": 165,
+          "type": "taxi"
+        }
+      ]
+    },
+    "150": {
+      "id": 150,
+      "x": 867,
+      "y": 1517,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 138,
+          "type": "taxi"
+        },
+        {
+          "to": 149,
+          "type": "taxi"
+        },
+        {
+          "to": 151,
+          "type": "taxi"
+        }
+      ]
+    },
+    "151": {
+      "id": 151,
+      "x": 932,
+      "y": 1592,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 150,
+          "type": "taxi"
+        },
+        {
+          "to": 152,
+          "type": "taxi"
+        },
+        {
+          "to": 165,
+          "type": "taxi"
+        },
+        {
+          "to": 166,
+          "type": "taxi"
+        }
+      ]
+    },
+    "152": {
+      "id": 152,
+      "x": 1023,
+      "y": 1522,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 138,
+          "type": "taxi"
+        },
+        {
+          "to": 151,
+          "type": "taxi"
+        },
+        {
+          "to": 153,
+          "type": "taxi"
+        }
+      ]
+    },
+    "153": {
+      "id": 153,
+      "x": 1070,
+      "y": 1582,
+      "types": [
+        "taxi",
+        "bus",
+        "underground"
+      ],
+      "edges": [
+        {
+          "to": 111,
+          "type": "underground"
+        },
+        {
+          "to": 124,
+          "type": "bus"
+        },
+        {
+          "to": 139,
+          "type": "taxi"
+        },
+        {
+          "to": 140,
+          "type": "underground"
+        },
+        {
+          "to": 152,
+          "type": "taxi"
+        },
+        {
+          "to": 154,
+          "type": "bus"
+        },
+        {
+          "to": 154,
+          "type": "taxi"
+        },
+        {
+          "to": 163,
+          "type": "underground"
+        },
+        {
+          "to": 166,
+          "type": "taxi"
+        },
+        {
+          "to": 167,
+          "type": "taxi"
+        },
+        {
+          "to": 180,
+          "type": "bus"
+        },
+        {
+          "to": 184,
+          "type": "bus"
+        },
+        {
+          "to": 185,
+          "type": "underground"
+        }
+      ]
+    },
+    "154": {
+      "id": 154,
+      "x": 1300,
+      "y": 1550,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 139,
+          "type": "taxi"
+        },
+        {
+          "to": 140,
+          "type": "bus"
+        },
+        {
+          "to": 140,
+          "type": "taxi"
+        },
+        {
+          "to": 153,
+          "type": "bus"
+        },
+        {
+          "to": 153,
+          "type": "taxi"
+        },
+        {
+          "to": 155,
+          "type": "taxi"
+        },
+        {
+          "to": 156,
+          "type": "bus"
+        }
+      ]
+    },
+    "155": {
+      "id": 155,
+      "x": 1364,
+      "y": 1649,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 154,
+          "type": "taxi"
+        },
+        {
+          "to": 156,
+          "type": "taxi"
+        },
+        {
+          "to": 167,
+          "type": "taxi"
+        },
+        {
+          "to": 168,
+          "type": "taxi"
+        }
+      ]
+    },
+    "156": {
+      "id": 156,
+      "x": 1525,
+      "y": 1650,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 140,
+          "type": "bus"
+        },
+        {
+          "to": 140,
+          "type": "taxi"
+        },
+        {
+          "to": 154,
+          "type": "bus"
+        },
+        {
+          "to": 155,
+          "type": "taxi"
+        },
+        {
+          "to": 157,
+          "type": "bus"
+        },
+        {
+          "to": 157,
+          "type": "taxi"
+        },
+        {
+          "to": 169,
+          "type": "taxi"
+        },
+        {
+          "to": 184,
+          "type": "bus"
+        }
+      ]
+    },
+    "157": {
+      "id": 157,
+      "x": 1627,
+      "y": 1670,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 115,
+          "type": "water"
+        },
+        {
+          "to": 133,
+          "type": "bus"
+        },
+        {
+          "to": 142,
+          "type": "bus"
+        },
+        {
+          "to": 156,
+          "type": "bus"
+        },
+        {
+          "to": 156,
+          "type": "taxi"
+        },
+        {
+          "to": 158,
+          "type": "taxi"
+        },
+        {
+          "to": 170,
+          "type": "taxi"
+        },
+        {
+          "to": 185,
+          "type": "bus"
+        },
+        {
+          "to": 194,
+          "type": "water"
+        }
+      ]
+    },
+    "158": {
+      "id": 158,
+      "x": 1849,
+      "y": 1591,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 141,
+          "type": "taxi"
+        },
+        {
+          "to": 142,
+          "type": "taxi"
+        },
+        {
+          "to": 157,
+          "type": "taxi"
+        },
+        {
+          "to": 159,
+          "type": "taxi"
+        }
+      ]
+    },
+    "159": {
+      "id": 159,
+      "x": 1856,
+      "y": 1856,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 158,
+          "type": "taxi"
+        },
+        {
+          "to": 170,
+          "type": "taxi"
+        },
+        {
+          "to": 172,
+          "type": "taxi"
+        },
+        {
+          "to": 186,
+          "type": "taxi"
+        },
+        {
+          "to": 198,
+          "type": "taxi"
+        }
+      ]
+    },
+    "160": {
+      "id": 160,
+      "x": 2272,
+      "y": 1664,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 128,
+          "type": "taxi"
+        },
+        {
+          "to": 143,
+          "type": "taxi"
+        },
+        {
+          "to": 161,
+          "type": "taxi"
+        },
+        {
+          "to": 173,
+          "type": "taxi"
+        }
+      ]
+    },
+    "161": {
+      "id": 161,
+      "x": 2462,
+      "y": 1661,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 107,
+          "type": "bus"
+        },
+        {
+          "to": 128,
+          "type": "bus"
+        },
+        {
+          "to": 135,
+          "type": "bus"
+        },
+        {
+          "to": 135,
+          "type": "taxi"
+        },
+        {
+          "to": 160,
+          "type": "taxi"
+        },
+        {
+          "to": 174,
+          "type": "taxi"
+        },
+        {
+          "to": 199,
+          "type": "bus"
+        }
+      ]
+    },
+    "162": {
+      "id": 162,
+      "x": 2706,
+      "y": 1682,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 136,
+          "type": "taxi"
+        },
+        {
+          "to": 175,
+          "type": "taxi"
+        }
+      ]
+    },
+    "163": {
+      "id": 163,
+      "x": 391,
+      "y": 1681,
+      "types": [
+        "taxi",
+        "bus",
+        "underground"
+      ],
+      "edges": [
+        {
+          "to": 111,
+          "type": "underground"
+        },
+        {
+          "to": 144,
+          "type": "bus"
+        },
+        {
+          "to": 146,
+          "type": "taxi"
+        },
+        {
+          "to": 153,
+          "type": "underground"
+        },
+        {
+          "to": 176,
+          "type": "bus"
+        },
+        {
+          "to": 177,
+          "type": "taxi"
+        },
+        {
+          "to": 191,
+          "type": "bus"
+        }
+      ]
+    },
+    "164": {
+      "id": 164,
+      "x": 506,
+      "y": 1705,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 147,
+          "type": "taxi"
+        },
+        {
+          "to": 148,
+          "type": "taxi"
+        },
+        {
+          "to": 178,
+          "type": "taxi"
+        },
+        {
+          "to": 179,
+          "type": "taxi"
+        }
+      ]
+    },
+    "165": {
+      "id": 165,
+      "x": 769,
+      "y": 1734,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 123,
+          "type": "bus"
+        },
+        {
+          "to": 149,
+          "type": "taxi"
+        },
+        {
+          "to": 151,
+          "type": "taxi"
+        },
+        {
+          "to": 179,
+          "type": "taxi"
+        },
+        {
+          "to": 180,
+          "type": "bus"
+        },
+        {
+          "to": 180,
+          "type": "taxi"
+        },
+        {
+          "to": 191,
+          "type": "bus"
+        }
+      ]
+    },
+    "166": {
+      "id": 166,
+      "x": 1029,
+      "y": 1680,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 151,
+          "type": "taxi"
+        },
+        {
+          "to": 153,
+          "type": "taxi"
+        },
+        {
+          "to": 181,
+          "type": "taxi"
+        },
+        {
+          "to": 183,
+          "type": "taxi"
+        }
+      ]
+    },
+    "167": {
+      "id": 167,
+      "x": 1231,
+      "y": 1732,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 153,
+          "type": "taxi"
+        },
+        {
+          "to": 155,
+          "type": "taxi"
+        },
+        {
+          "to": 168,
+          "type": "taxi"
+        },
+        {
+          "to": 183,
+          "type": "taxi"
+        }
+      ]
+    },
+    "168": {
+      "id": 168,
+      "x": 1305,
+      "y": 1789,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 155,
+          "type": "taxi"
+        },
+        {
+          "to": 167,
+          "type": "taxi"
+        },
+        {
+          "to": 184,
+          "type": "taxi"
+        }
+      ]
+    },
+    "169": {
+      "id": 169,
+      "x": 1518,
+      "y": 1765,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 156,
+          "type": "taxi"
+        },
+        {
+          "to": 184,
+          "type": "taxi"
+        }
+      ]
+    },
+    "170": {
+      "id": 170,
+      "x": 1615,
+      "y": 1744,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 157,
+          "type": "taxi"
+        },
+        {
+          "to": 159,
+          "type": "taxi"
+        },
+        {
+          "to": 185,
+          "type": "taxi"
+        }
+      ]
+    },
+    "171": {
+      "id": 171,
+      "x": 2396,
+      "y": 2074,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 173,
+          "type": "taxi"
+        },
+        {
+          "to": 175,
+          "type": "taxi"
+        },
+        {
+          "to": 199,
+          "type": "taxi"
+        }
+      ]
+    },
+    "172": {
+      "id": 172,
+      "x": 2038,
+      "y": 1784,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 128,
+          "type": "taxi"
+        },
+        {
+          "to": 159,
+          "type": "taxi"
+        },
+        {
+          "to": 187,
+          "type": "taxi"
+        }
+      ]
+    },
+    "173": {
+      "id": 173,
+      "x": 2318,
+      "y": 1867,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 160,
+          "type": "taxi"
+        },
+        {
+          "to": 171,
+          "type": "taxi"
+        },
+        {
+          "to": 174,
+          "type": "taxi"
+        },
+        {
+          "to": 188,
+          "type": "taxi"
+        }
+      ]
+    },
+    "174": {
+      "id": 174,
+      "x": 2563,
+      "y": 1805,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 161,
+          "type": "taxi"
+        },
+        {
+          "to": 173,
+          "type": "taxi"
+        },
+        {
+          "to": 175,
+          "type": "taxi"
+        }
+      ]
+    },
+    "175": {
+      "id": 175,
+      "x": 2672,
+      "y": 1905,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 162,
+          "type": "taxi"
+        },
+        {
+          "to": 171,
+          "type": "taxi"
+        },
+        {
+          "to": 174,
+          "type": "taxi"
+        }
+      ]
+    },
+    "176": {
+      "id": 176,
+      "x": 116,
+      "y": 1805,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 163,
+          "type": "bus"
+        },
+        {
+          "to": 177,
+          "type": "taxi"
+        },
+        {
+          "to": 189,
+          "type": "taxi"
+        },
+        {
+          "to": 190,
+          "type": "bus"
+        }
+      ]
+    },
+    "177": {
+      "id": 177,
+      "x": 244,
+      "y": 1781,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 144,
+          "type": "taxi"
+        },
+        {
+          "to": 163,
+          "type": "taxi"
+        },
+        {
+          "to": 176,
+          "type": "taxi"
+        }
+      ]
+    },
+    "178": {
+      "id": 178,
+      "x": 439,
+      "y": 1760,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 164,
+          "type": "taxi"
+        },
+        {
+          "to": 189,
+          "type": "taxi"
+        },
+        {
+          "to": 191,
+          "type": "taxi"
+        }
+      ]
+    },
+    "179": {
+      "id": 179,
+      "x": 668,
+      "y": 1813,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 164,
+          "type": "taxi"
+        },
+        {
+          "to": 165,
+          "type": "taxi"
+        },
+        {
+          "to": 191,
+          "type": "taxi"
+        }
+      ]
+    },
+    "180": {
+      "id": 180,
+      "x": 815,
+      "y": 1845,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 153,
+          "type": "bus"
+        },
+        {
+          "to": 165,
+          "type": "bus"
+        },
+        {
+          "to": 165,
+          "type": "taxi"
+        },
+        {
+          "to": 181,
+          "type": "taxi"
+        },
+        {
+          "to": 184,
+          "type": "bus"
+        },
+        {
+          "to": 190,
+          "type": "bus"
+        },
+        {
+          "to": 193,
+          "type": "taxi"
+        }
+      ]
+    },
+    "181": {
+      "id": 181,
+      "x": 949,
+      "y": 1808,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 166,
+          "type": "taxi"
+        },
+        {
+          "to": 180,
+          "type": "taxi"
+        },
+        {
+          "to": 182,
+          "type": "taxi"
+        },
+        {
+          "to": 193,
+          "type": "taxi"
+        }
+      ]
+    },
+    "182": {
+      "id": 182,
+      "x": 1015,
+      "y": 1836,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 181,
+          "type": "taxi"
+        },
+        {
+          "to": 183,
+          "type": "taxi"
+        },
+        {
+          "to": 195,
+          "type": "taxi"
+        }
+      ]
+    },
+    "183": {
+      "id": 183,
+      "x": 1164,
+      "y": 1764,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 166,
+          "type": "taxi"
+        },
+        {
+          "to": 167,
+          "type": "taxi"
+        },
+        {
+          "to": 182,
+          "type": "taxi"
+        },
+        {
+          "to": 196,
+          "type": "taxi"
+        }
+      ]
+    },
+    "184": {
+      "id": 184,
+      "x": 1425,
+      "y": 1874,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 153,
+          "type": "bus"
+        },
+        {
+          "to": 156,
+          "type": "bus"
+        },
+        {
+          "to": 168,
+          "type": "taxi"
+        },
+        {
+          "to": 169,
+          "type": "taxi"
+        },
+        {
+          "to": 180,
+          "type": "bus"
+        },
+        {
+          "to": 185,
+          "type": "bus"
+        },
+        {
+          "to": 185,
+          "type": "taxi"
+        },
+        {
+          "to": 196,
+          "type": "taxi"
+        },
+        {
+          "to": 197,
+          "type": "taxi"
+        }
+      ]
+    },
+    "185": {
+      "id": 185,
+      "x": 1564,
+      "y": 1965,
+      "types": [
+        "taxi",
+        "bus",
+        "underground"
+      ],
+      "edges": [
+        {
+          "to": 128,
+          "type": "underground"
+        },
+        {
+          "to": 153,
+          "type": "underground"
+        },
+        {
+          "to": 157,
+          "type": "bus"
+        },
+        {
+          "to": 170,
+          "type": "taxi"
+        },
+        {
+          "to": 184,
+          "type": "bus"
+        },
+        {
+          "to": 184,
+          "type": "taxi"
+        },
+        {
+          "to": 186,
+          "type": "taxi"
+        },
+        {
+          "to": 187,
+          "type": "bus"
+        }
+      ]
+    },
+    "186": {
+      "id": 186,
+      "x": 1728,
+      "y": 1938,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 159,
+          "type": "taxi"
+        },
+        {
+          "to": 185,
+          "type": "taxi"
+        },
+        {
+          "to": 198,
+          "type": "taxi"
+        }
+      ]
+    },
+    "187": {
+      "id": 187,
+      "x": 1977,
+      "y": 1891,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 128,
+          "type": "bus"
+        },
+        {
+          "to": 172,
+          "type": "taxi"
+        },
+        {
+          "to": 185,
+          "type": "bus"
+        },
+        {
+          "to": 188,
+          "type": "taxi"
+        },
+        {
+          "to": 198,
+          "type": "taxi"
+        }
+      ]
+    },
+    "188": {
+      "id": 188,
+      "x": 2222,
+      "y": 1908,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 128,
+          "type": "taxi"
+        },
+        {
+          "to": 173,
+          "type": "taxi"
+        },
+        {
+          "to": 187,
+          "type": "taxi"
+        },
+        {
+          "to": 199,
+          "type": "taxi"
+        }
+      ]
+    },
+    "189": {
+      "id": 189,
+      "x": 236,
+      "y": 1971,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 176,
+          "type": "taxi"
+        },
+        {
+          "to": 178,
+          "type": "taxi"
+        },
+        {
+          "to": 190,
+          "type": "taxi"
+        }
+      ]
+    },
+    "190": {
+      "id": 190,
+      "x": 346,
+      "y": 2041,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 176,
+          "type": "bus"
+        },
+        {
+          "to": 180,
+          "type": "bus"
+        },
+        {
+          "to": 189,
+          "type": "taxi"
+        },
+        {
+          "to": 191,
+          "type": "bus"
+        },
+        {
+          "to": 191,
+          "type": "taxi"
+        },
+        {
+          "to": 192,
+          "type": "taxi"
+        }
+      ]
+    },
+    "191": {
+      "id": 191,
+      "x": 516,
+      "y": 1925,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 163,
+          "type": "bus"
+        },
+        {
+          "to": 165,
+          "type": "bus"
+        },
+        {
+          "to": 178,
+          "type": "taxi"
+        },
+        {
+          "to": 179,
+          "type": "taxi"
+        },
+        {
+          "to": 190,
+          "type": "bus"
+        },
+        {
+          "to": 190,
+          "type": "taxi"
+        },
+        {
+          "to": 192,
+          "type": "taxi"
+        }
+      ]
+    },
+    "192": {
+      "id": 192,
+      "x": 546,
+      "y": 2069,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 190,
+          "type": "taxi"
+        },
+        {
+          "to": 191,
+          "type": "taxi"
+        },
+        {
+          "to": 194,
+          "type": "taxi"
+        }
+      ]
+    },
+    "193": {
+      "id": 193,
+      "x": 913,
+      "y": 1923,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 180,
+          "type": "taxi"
+        },
+        {
+          "to": 181,
+          "type": "taxi"
+        },
+        {
+          "to": 194,
+          "type": "taxi"
+        }
+      ]
+    },
+    "194": {
+      "id": 194,
+      "x": 956,
+      "y": 1989,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 157,
+          "type": "water"
+        },
+        {
+          "to": 192,
+          "type": "taxi"
+        },
+        {
+          "to": 193,
+          "type": "taxi"
+        },
+        {
+          "to": 195,
+          "type": "taxi"
+        }
+      ]
+    },
+    "195": {
+      "id": 195,
+      "x": 1051,
+      "y": 1992,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 182,
+          "type": "taxi"
+        },
+        {
+          "to": 194,
+          "type": "taxi"
+        },
+        {
+          "to": 197,
+          "type": "taxi"
+        }
+      ]
+    },
+    "196": {
+      "id": 196,
+      "x": 1220,
+      "y": 1900,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 183,
+          "type": "taxi"
+        },
+        {
+          "to": 184,
+          "type": "taxi"
+        },
+        {
+          "to": 197,
+          "type": "taxi"
+        }
+      ]
+    },
+    "197": {
+      "id": 197,
+      "x": 1244,
+      "y": 2012,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 184,
+          "type": "taxi"
+        },
+        {
+          "to": 195,
+          "type": "taxi"
+        },
+        {
+          "to": 196,
+          "type": "taxi"
+        }
+      ]
+    },
+    "198": {
+      "id": 198,
+      "x": 1843,
+      "y": 2094,
+      "types": [
+        "taxi"
+      ],
+      "edges": [
+        {
+          "to": 159,
+          "type": "taxi"
+        },
+        {
+          "to": 186,
+          "type": "taxi"
+        },
+        {
+          "to": 187,
+          "type": "taxi"
+        },
+        {
+          "to": 199,
+          "type": "taxi"
+        }
+      ]
+    },
+    "199": {
+      "id": 199,
+      "x": 2239,
+      "y": 2109,
+      "types": [
+        "taxi",
+        "bus"
+      ],
+      "edges": [
+        {
+          "to": 128,
+          "type": "bus"
+        },
+        {
+          "to": 161,
+          "type": "bus"
+        },
+        {
+          "to": 171,
+          "type": "taxi"
+        },
+        {
+          "to": 188,
+          "type": "taxi"
+        },
+        {
+          "to": 198,
+          "type": "taxi"
+        }
+      ]
+    }
+  }
+}
