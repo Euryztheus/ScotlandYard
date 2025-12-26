@@ -1,7 +1,9 @@
 import { GameSettings } from "./types.ts";
 
 export const DEFAULT_SETTINGS: GameSettings = {
-    mrXStartTickets: { taxi: 4, bus: 3, underground: 3, water: 0 }, // Reduced for testing
-    detectiveStartTickets: { taxi: 10, bus: 8, underground: 4, water: 0 },
+    mrXStartTickets: { taxi: 4, bus: 3, underground: 3, black: 2 }, // Reduced for testing
+    detectiveStartTickets: { taxi: 10, bus: 8, underground: 4, black: 0 },
     infiniteTickets: false
 };
+
+export const REVEAL_ROUNDS = [3, 8, 13, 18, 24];

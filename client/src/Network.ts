@@ -4,9 +4,14 @@ import { GameState } from '../../shared/types';
 export class Network {
     private socket: Socket;
     private onStateChange: (state: GameState) => void;
+    private onGameOver: (data: any) => void;
 
-    constructor(onStateChange: (state: GameState) => void) {
+    constructor(
+        onStateChange: (state: GameState) => void,
+        onGameOver: (data: any) => void
+    ) {
         this.onStateChange = onStateChange;
+        this.onGameOver = onGameOver;
         this.socket = io('http://localhost:3000');
 
         this.socket.on('connect', () => {
@@ -22,6 +27,11 @@ export class Network {
             console.log('Game Updated:', state);
             this.onStateChange(state);
         });
+
+        this.socket.on('game_over', (data: any) => {
+            console.log("Game Over received:", data);
+            this.onGameOver(data);
+        });
     }
 
     public createGame() {
@@ -32,9 +42,9 @@ export class Network {
         this.socket.emit('join_game', code);
     }
 
-    public sendMove(toNode: number, transport: string) {
-        console.log(`Sending move: Node ${toNode} via ${transport}`);
-        this.socket.emit('player_move', { toNode, transport });
+    public sendMove(toNode: number, transport: string, useBlackTicket: boolean = false) {
+        console.log(`Sending move: Node ${toNode} via ${transport} (Black: ${useBlackTicket})`);
+        this.socket.emit('player_move', { toNode, transport, useBlackTicket });
     }
 
     public getID(): string {

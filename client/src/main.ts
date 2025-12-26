@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { GameScene } from './GameScene';
 import { Network } from './Network';
 import { GameState, Player, Transport } from '../../shared/types'; 
+import { REVEAL_ROUNDS } from '../../shared/constants';
 
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
@@ -17,164 +18,233 @@ const game = new Phaser.Game(config);
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- UI ELEMENTS ---
-    const menu = document.getElementById('menu-overlay')!;
-    const btnCreate = document.getElementById('btn-create')!;
-    const btnJoin = document.getElementById('btn-join')!;
-    const inputCode = document.getElementById('input-code') as HTMLInputElement;
+    const getEl = (id: string) => document.getElementById(id);
 
-    const gameUi = document.getElementById('game-ui')!;
-    const lobbyDisplay = document.getElementById('lobby-code-display')!;
-    const playerList = document.getElementById('player-list')!;
-    const roundDisplay = document.getElementById('round-display')!;
+    const menu = getEl('menu-overlay');
+    const btnCreate = getEl('btn-create');
+    const btnJoin = getEl('btn-join');
+    const inputCode = getEl('input-code') as HTMLInputElement;
 
-    const lobbyScreen = document.getElementById('lobby-screen')!;
-    const lobbyTitle = document.getElementById('lobby-code-title')!;
-    const lobbyPlayerList = document.getElementById('lobby-player-list')!;
-    const btnReady = document.getElementById('btn-ready')!;
-    const btnStart = document.getElementById('btn-start')!;
-    const btnClaimMrX = document.getElementById('btn-claim-mrx')!;
+    // Game HUD
+    const gameUi = getEl('game-ui');
+    const lobbyDisplay = getEl('lobby-code-display');
+    const playerList = getEl('player-list');
+    const roundDisplay = getEl('round-display');
 
-    // Settings Inputs
-    const settingInfinite = document.getElementById('setting-infinite') as HTMLInputElement;
+    // Lobby Screen
+    const lobbyScreen = getEl('lobby-screen');
+    const lobbyTitle = getEl('lobby-code-title');
+    const lobbyPlayerList = getEl('lobby-player-list');
+    const btnReady = getEl('btn-ready');
+    const btnStart = getEl('btn-start');
+    const btnClaimMrX = getEl('btn-claim-mrx');
+
+    // Settings
+    const settingInfinite = getEl('setting-infinite') as HTMLInputElement;
     const inputs = {
-        detTaxi: document.getElementById('set-det-taxi') as HTMLInputElement,
-        detBus: document.getElementById('set-det-bus') as HTMLInputElement,
-        detUnd: document.getElementById('set-det-und') as HTMLInputElement,
-        mrxTaxi: document.getElementById('set-mrx-taxi') as HTMLInputElement,
-        mrxBus: document.getElementById('set-mrx-bus') as HTMLInputElement,
-        mrxUnd: document.getElementById('set-mrx-und') as HTMLInputElement,
+        detTaxi: getEl('set-det-taxi') as HTMLInputElement,
+        detBus: getEl('set-det-bus') as HTMLInputElement,
+        detUnd: getEl('set-det-und') as HTMLInputElement,
+        mrxTaxi: getEl('set-mrx-taxi') as HTMLInputElement,
+        mrxBus: getEl('set-mrx-bus') as HTMLInputElement,
+        mrxUnd: getEl('set-mrx-und') as HTMLInputElement,
+        mrxBlack: getEl('set-mrx-black') as HTMLInputElement,
     };
 
-    if (!menu || !lobbyScreen) {
-        console.error("Critical UI elements missing! Check index.html");
-        return;
+    // Tracker Elements
+    const trackerContainer = getEl('mrx-tracker');
+    const trackerHistory = getEl('tracker-history');
+    const trackerIcon = getEl('tracker-icon');
+    const nextRevealDisplay = getEl('next-reveal-round');
+    const trackerSummary = getEl('tracker-summary');
+
+    // CRITICAL: Check if tracker exists
+    if (!menu || !lobbyScreen || !gameUi || !trackerContainer) {
+        console.error("UI Elements missing! Check index.html");
+        return; 
     }
 
     let currentLobbyCode = "???";
 
+    // --- TRACKER TOGGLE LOGIC ---
+    if (trackerContainer && trackerHistory && trackerIcon) {
+        trackerContainer.onclick = () => {
+            const isHidden = trackerHistory.style.display === 'none';
+            trackerHistory.style.display = isHidden ? 'block' : 'none';
+            trackerIcon.innerText = isHidden ? '▲' : '▼';
+        };
+    }
+
     // --- HELPER: Display Tickets ---
     const formatTickets = (tickets: Record<Transport, number>) => {
         if (!tickets) return "";
-        // Simple Icons: 🚕 🚌 🚇 ⛴️
-        return `🚕${tickets.taxi} 🚌${tickets.bus} 🚇${tickets.underground} ⛴️${tickets.water}`;
+        return `🚕${tickets.taxi} 🚌${tickets.bus} 🚇${tickets.underground} 🏴${tickets.black}`;
     };
 
     // --- GAME STATE HANDLER ---
     const onGameStateUpdate = (data: any) => {
         let state: GameState = data.gameState || data;
-        if (data.gameState) currentLobbyCode = data.lobbyCode;
-
-        if (state.lobbyCode) {
-            currentLobbyCode = state.lobbyCode;
-        }
+        if (state.lobbyCode) currentLobbyCode = state.lobbyCode;
 
         const myId = network.getID();
         const me = state.players.find((p: Player) => p.id === myId);
 
         // --- PHASE 1: LOBBY ---
         if (state.phase === 'LOBBY') {
-            menu.style.display = 'none';
-            gameUi.style.display = 'none';
-            lobbyScreen.style.display = 'block';
+            menu!.style.display = 'none';
+            gameUi!.style.display = 'none';
+            lobbyScreen!.style.display = 'block';
 
-            lobbyTitle.innerText = currentLobbyCode;
+            if (lobbyTitle) lobbyTitle.innerText = currentLobbyCode;
 
-            // Render Lobby Player List
-            lobbyPlayerList.innerHTML = '';
-            state.players.forEach((p: Player) => {
-                const row = document.createElement('div');
-                row.style.display = 'flex';
-                row.style.justifyContent = 'space-between';
-                row.style.padding = '5px';
-                row.style.borderBottom = '1px solid #555';
-                
-                const isMe = p.id === myId ? " (YOU)" : "";
-                const hostText = p.isHost ? ' [HOST]' : '';
-                const roleIcon = p.role === 'MR_X' ? '🕵️' : '👮';
+            if (lobbyPlayerList) {
+                lobbyPlayerList.innerHTML = '';
+                state.players.forEach((p: Player) => {
+                    const row = document.createElement('div');
+                    row.style.display = 'flex';
+                    row.style.justifyContent = 'space-between';
+                    row.style.padding = '5px';
+                    row.style.borderBottom = '1px solid #555';
+                    
+                    const isMe = p.id === myId ? " (YOU)" : "";
+                    const hostText = p.isHost ? ' [HOST]' : '';
+                    const roleIcon = p.role === 'MR_X' ? '🕵️' : '👮';
 
-                row.innerText = `${roleIcon} ${p.role}${isMe}${hostText}`;
-                
-                const statusSpan = document.createElement('span');
-                statusSpan.innerText = p.isReady ? "✅ READY" : "⏳ ...";
-                statusSpan.style.color = p.isReady ? '#48bb78' : '#cbd5e0';
-                
-                row.appendChild(statusSpan);
-                lobbyPlayerList.appendChild(row);
-            });
+                    row.innerText = `${roleIcon} ${p.role}${isMe}${hostText}`;
+                    
+                    const statusSpan = document.createElement('span');
+                    statusSpan.innerText = p.isReady ? "✅ READY" : "⏳ ...";
+                    statusSpan.style.color = p.isReady ? '#48bb78' : '#cbd5e0';
+                    row.appendChild(statusSpan);
+                    lobbyPlayerList.appendChild(row);
+                });
+            }
 
-            // Update Ready Button
-            if (me) {
+            if (me && btnReady) {
                 btnReady.innerText = me.isReady ? "Ready!" : "Not Ready";
                 btnReady.style.backgroundColor = me.isReady ? "#28a745" : "#555";
             }
 
-            // --- SYNC SETTINGS ---
-            // Update the input fields to match the server state
-            if (state.settings) {
-                // Only update inputs if I am NOT the host (to avoid overwriting while typing)
-                // OR if it's the first load
+            // Sync Settings (Host Logic)
+            if (state.settings && settingInfinite) {
                 if (!me?.isHost || document.activeElement?.tagName !== 'INPUT') {
                     settingInfinite.checked = state.settings.infiniteTickets;
-                    inputs.detTaxi.value = state.settings.detectiveStartTickets.taxi.toString();
-                    inputs.detBus.value = state.settings.detectiveStartTickets.bus.toString();
-                    inputs.detUnd.value = state.settings.detectiveStartTickets.underground.toString();
-                    inputs.mrxTaxi.value = state.settings.mrXStartTickets.taxi.toString();
-                    inputs.mrxBus.value = state.settings.mrXStartTickets.bus.toString();
-                    inputs.mrxUnd.value = state.settings.mrXStartTickets.underground.toString();
+                    if(inputs.detTaxi) inputs.detTaxi.value = state.settings.detectiveStartTickets.taxi.toString();
+                    if(inputs.detBus) inputs.detBus.value = state.settings.detectiveStartTickets.bus.toString();
+                    if(inputs.detUnd) inputs.detUnd.value = state.settings.detectiveStartTickets.underground.toString();
+                    if(inputs.mrxTaxi) inputs.mrxTaxi.value = state.settings.mrXStartTickets.taxi.toString();
+                    if(inputs.mrxBus) inputs.mrxBus.value = state.settings.mrXStartTickets.bus.toString();
+                    if(inputs.mrxUnd) inputs.mrxUnd.value = state.settings.mrXStartTickets.underground.toString();
+                    if(inputs.mrxBlack) inputs.mrxBlack.value = (state.settings.mrXStartTickets.black ?? 0).toString();
                 }
             }
-
-            // Enable/Disable Controls based on Host status
-            const isHost = me?.isHost || false;
-            settingInfinite.disabled = !isHost;
-            Object.values(inputs).forEach(input => input.disabled = !isHost);
             
-            // Show Start Button if Host and Everyone Ready
+            const isHost = me?.isHost || false;
+            if(settingInfinite) settingInfinite.disabled = !isHost;
+            Object.values(inputs).forEach(input => { if(input) input.disabled = !isHost; });
+            
             const allReady = state.players.length > 0 && state.players.every(p => p.isReady);
-            btnStart.style.display = (isHost && allReady) ? 'block' : 'none';
+            if (btnStart) btnStart.style.display = (isHost && allReady) ? 'block' : 'none';
 
         // --- PHASE 2: PLAYING ---
         } else if (state.phase === 'PLAYING') {
-            menu.style.display = 'none';
-            lobbyScreen.style.display = 'none';
-            gameUi.style.display = 'block';
+            menu!.style.display = 'none';
+            lobbyScreen!.style.display = 'none';
+            gameUi!.style.display = 'block';
 
-            lobbyDisplay.innerText = currentLobbyCode;
-            roundDisplay.innerText = state.round.toString();
+            if(lobbyDisplay) lobbyDisplay.innerText = currentLobbyCode;
+            if(roundDisplay) roundDisplay.innerText = state.round.toString();
 
-            // Render HUD Player List WITH TICKETS
-            playerList.innerHTML = ''; 
-            state.players.forEach((p: Player) => {
-                const container = document.createElement('div');
-                const color = p.role === 'MR_X' ? '#aaaaaa' : '#4299e1'; 
-                
-                const isTurn = state.turn === p.id;
-                const isMe = p.id === myId ? " (YOU)" : "";
-                
-                container.style.color = color;
-                container.style.padding = '8px';
-                container.style.marginBottom = '5px';
-                container.style.backgroundColor = isTurn ? 'rgba(255,255,255,0.1)' : 'transparent';
-                container.style.borderLeft = isTurn ? `4px solid ${color}` : '4px solid transparent';
-                
-                // Name Line
-                const nameDiv = document.createElement('div');
-                nameDiv.style.fontWeight = 'bold';
-                nameDiv.style.fontSize = '20px';
-                nameDiv.innerText = `${p.role}${isMe} (Node ${p.position > 0 ? p.position : '???'})`;
-                
-                // Tickets Line
-                const ticketDiv = document.createElement('div');
-                ticketDiv.style.fontSize = '20px';
-                ticketDiv.style.marginTop = '2px';
-                ticketDiv.style.color = '#ddd';
-                ticketDiv.innerText = formatTickets(p.tickets);
+            // Render Player List
+            if (playerList) {
+                playerList.innerHTML = ''; 
+                state.players.forEach((p: Player) => {
+                    const container = document.createElement('div');
+                    const color = p.role === 'MR_X' ? '#aaaaaa' : '#4299e1'; 
+                    const isTurn = state.turn === p.id;
+                    const isMe = p.id === myId ? " (YOU)" : "";
 
-                container.appendChild(nameDiv);
-                container.appendChild(ticketDiv);
-                playerList.appendChild(container);
-            });
+                    container.style.color = color;
+                    container.style.padding = '8px';
+                    container.style.marginBottom = '5px';
+                    container.style.backgroundColor = isTurn ? 'rgba(255,255,255,0.1)' : 'transparent';
+                    container.style.borderLeft = isTurn ? `4px solid ${color}` : '4px solid transparent';
+                    
+                    const nameDiv = document.createElement('div');
+                    nameDiv.style.fontWeight = 'bold';
+                    nameDiv.innerText = `${p.role}${isMe} (Node ${p.position > 0 ? p.position : '???'})`;
+                    
+                    const ticketDiv = document.createElement('div');
+                    ticketDiv.style.fontSize = '12px';
+                    ticketDiv.style.marginTop = '2px';
+                    ticketDiv.style.color = '#ddd';
+                    ticketDiv.innerText = formatTickets(p.tickets);
 
+                    container.appendChild(nameDiv);
+                    container.appendChild(ticketDiv);
+                    playerList.appendChild(container);
+                });
+            }
+
+            // --- MR X TRACKER UPDATE ---
+            if (trackerHistory && nextRevealDisplay && trackerSummary) {
+                const nextReveal = REVEAL_ROUNDS.find(r => r > state.round) || "END";
+                nextRevealDisplay.innerText = nextReveal.toString();
+                trackerSummary.innerText = `Round ${state.round}`;
+
+                trackerHistory.innerHTML = '';
+                if (state.moveHistory) {
+                    state.moveHistory.forEach((move: any) => {
+                        const row = document.createElement('div');
+                        row.style.display = 'flex';
+                        row.style.alignItems = 'center';
+                        row.style.marginBottom = '4px';
+                        row.style.fontSize = '12px';
+                        
+                        const roundSpan = document.createElement('span');
+                        roundSpan.innerText = `${move.round}.`;
+                        roundSpan.style.width = '25px';
+                        roundSpan.style.color = '#888';
+
+                        const badge = document.createElement('span');
+                        badge.style.padding = '2px 6px';
+                        badge.style.borderRadius = '4px';
+                        badge.style.color = '#000';
+                        badge.style.fontWeight = 'bold';
+                        badge.style.marginRight = '8px';
+                        badge.style.minWidth = '60px';
+                        badge.style.textAlign = 'center';
+                        
+                        if (move.transport === 'taxi') { badge.style.background = '#f6e05e'; badge.innerText = 'TAXI'; }
+                        else if (move.transport === 'bus') { badge.style.background = '#4299e1'; badge.innerText = 'BUS'; }
+                        else if (move.transport === 'underground') { badge.style.background = '#f56565'; badge.innerText = 'UND'; }
+                        else { badge.style.background = '#000'; badge.style.color = '#fff'; badge.innerText = 'BLACK'; }
+
+                        const posSpan = document.createElement('span');
+                        if (move.position) {
+                            posSpan.innerText = `at Node ${move.position}`;
+                            posSpan.style.color = '#f6e05e';
+                            posSpan.style.fontWeight = 'bold';
+                        } else {
+                            posSpan.innerText = '???';
+                            posSpan.style.color = '#555';
+                        }
+
+                        if (REVEAL_ROUNDS.includes(move.round)) {
+                            row.style.borderLeft = '2px solid #f6e05e';
+                            row.style.paddingLeft = '5px';
+                        }
+
+                        row.appendChild(roundSpan);
+                        row.appendChild(badge);
+                        row.appendChild(posSpan);
+                        trackerHistory.appendChild(row);
+                    });
+                    trackerHistory.scrollTop = trackerHistory.scrollHeight;
+                }
+            }
+
+            // Update Map
             const scene = game.scene.getScene('GameScene') as GameScene;
             if (scene) {
                 scene.setMyId(network.getID());
@@ -182,17 +252,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     };
-
-    const network = new Network(onGameStateUpdate);
+    const onGameOver = (data: { winner: string, reason: string }) => {
+        // Simple Alert for now (or replace with a nice DOM overlay)
+        setTimeout(() => {
+            alert(`GAME OVER!\nWinner: ${data.winner}\nReason: ${data.reason}`);
+            // Reload page to reset to menu
+            window.location.reload();
+        }, 100);
+    };
+    
+    const network = new Network(onGameStateUpdate, onGameOver);
 
     // --- EVENT LISTENERS ---
-    btnCreate.onclick = () => network.createGame();
-    btnJoin.onclick = () => network.joinGame(inputCode.value.toUpperCase());
-    btnReady.onclick = () => network.toggleReady();
-    btnStart.onclick = () => network.startGame();
-    btnClaimMrX.onclick = () => network.claimMrX();
+    if(btnCreate) btnCreate.onclick = () => network.createGame();
+    if(btnJoin) btnJoin.onclick = () => network.joinGame(inputCode.value.toUpperCase());
+    if(btnReady) btnReady.onclick = () => network.toggleReady();
+    if(btnStart) btnStart.onclick = () => network.startGame();
+    if(btnClaimMrX) btnClaimMrX.onclick = () => network.claimMrX();
 
-    // Settings Listener (Host Only)
     const handleSettingsChange = () => {
         network.updateSettings({
             infiniteTickets: settingInfinite.checked,
@@ -200,22 +277,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 taxi: parseInt(inputs.detTaxi.value) || 0,
                 bus: parseInt(inputs.detBus.value) || 0,
                 underground: parseInt(inputs.detUnd.value) || 0,
-                water: 0
+                black: 0
             },
             mrXStartTickets: {
                 taxi: parseInt(inputs.mrxTaxi.value) || 0,
                 bus: parseInt(inputs.mrxBus.value) || 0,
                 underground: parseInt(inputs.mrxUnd.value) || 0,
-                water: 5 // Default water for Mr X
+                black: parseInt(inputs.mrxBlack.value) || 0 
             }
         });
     };
 
-    // Attach listeners to all inputs
-    settingInfinite.onchange = handleSettingsChange;
-    Object.values(inputs).forEach(input => input.onchange = handleSettingsChange);
+    if(settingInfinite) settingInfinite.onchange = handleSettingsChange;
+    Object.values(inputs).forEach(input => { if(input) input.onchange = handleSettingsChange; });
 
     game.events.on('request_move', (data: any) => {
-        network.sendMove(data.toNode, data.transport);
+        network.sendMove(data.toNode, data.transport, data.useBlackTicket);
     });
 });

@@ -1,4 +1,4 @@
-export type Transport = 'taxi' | 'bus' | 'underground' | 'water';
+export type Transport = 'taxi' | 'bus' | 'underground' | 'black';
 export type GamePhase = 'LOBBY' | 'PLAYING' | 'FINISHED';
 
 export interface Edge {
@@ -33,6 +33,13 @@ export interface Player {
     isHost: boolean; 
 }
 
+export interface MoveRecord {
+    round: number;
+    transport: Transport; // 'taxi', 'bus', 'underground', or 'black'
+    position?: number;    // Only present if revealed
+    isHidden: boolean;
+}
+
 export interface GameState {
     lobbyCode: string;
     phase: GamePhase;
@@ -40,4 +47,5 @@ export interface GameState {
     turn: string; 
     round: number;
     settings: GameSettings;
+    moveHistory: MoveRecord[];
 }
