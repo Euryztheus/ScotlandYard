@@ -1,5 +1,47 @@
 <body>
     <div id="game-container"></div>
+
+    <div id="lobby-screen" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #333; color: white; padding: 20px; border-radius: 8px; width: 450px; font-family: sans-serif; max-height: 90vh; overflow-y: auto;">
+        <h1 style="margin-top: 0; text-align: center;">Lobby <span id="lobby-code-title" style="color: #f6e05e;"></span></h1>
+        
+        <div style="margin-bottom: 10px; display: flex; justify-content: flex-end;">
+            <button id="btn-claim-mrx" style="padding: 5px 10px; background: #000; color: #fff; border: 1px solid #555; cursor: pointer; font-size: 12px;">Claim Mr. X</button>
+        </div>
+        <div id="lobby-player-list" style="background: #444; padding: 10px; margin-bottom: 15px; border-radius: 4px;"></div>
+        
+        <div id="lobby-settings" style="margin-bottom: 15px; border-top: 1px solid #555; padding-top: 10px;">
+            <h3 style="margin: 0 0 10px 0; font-size: 16px;">Game Settings (Host Only)</h3>
+            
+            <label style="display: block; margin-bottom: 10px;">
+                <input type="checkbox" id="setting-infinite"> Infinite Tickets
+            </label>
+    
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 13px;">
+                <div style="background: #2a4365; padding: 10px; border-radius: 4px;">
+                    <strong style="color: #63b3ed;">Detectives</strong>
+                    <div style="margin-top: 5px;">
+                        Taxi: <input type="number" id="set-det-taxi" style="width: 40px;" min="0"><br>
+                        Bus: <input type="number" id="set-det-bus" style="width: 40px; margin-top: 2px;" min="0"><br>
+                        Und: <input type="number" id="set-det-und" style="width: 40px; margin-top: 2px;" min="0">
+                    </div>
+                </div>
+    
+                <div style="background: #2d3748; padding: 10px; border-radius: 4px;">
+                    <strong style="color: #a0aec0;">Mr. X</strong>
+                    <div style="margin-top: 5px;">
+                        Taxi: <input type="number" id="set-mrx-taxi" style="width: 40px;" min="0"><br>
+                        Bus: <input type="number" id="set-mrx-bus" style="width: 40px; margin-top: 2px;" min="0"><br>
+                        Und: <input type="number" id="set-mrx-und" style="width: 40px; margin-top: 2px;" min="0">
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button id="btn-ready" style="flex: 1; padding: 12px; cursor: pointer; background: #555; color: white; border: none; font-weight: bold;">Not Ready</button>
+            <button id="btn-start" style="flex: 1; padding: 12px; cursor: pointer; background: #28a745; color: white; border: none; display: none; font-weight: bold;">START GAME</button>
+        </div>
+    </div>
     
     <div id="menu-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 8px; text-align: center; font-family: sans-serif;">
         <h1>Scotland Yard</h1>
