@@ -32,7 +32,7 @@ npm run dev
 # Runs on localhost:5173
 ```
 
-### 4. Roadmap & Missing Features
+### Future Features
 **UI:** Fix the `game over` notifications from alert to a proper ui \
 **Rejoining:** Save `socket.id` or a custom `sessionId` in `localStorage`. On connect, send this ID. If the server sees it in an active game, reconnect the user instead of making a new player. \
 **Spectator Mode:** Add a button in the lobby "Join as Spectator". Spectators receive game updates but have no `player_move` permissions. \
