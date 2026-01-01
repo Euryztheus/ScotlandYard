@@ -1,7 +1,8 @@
 # Scotland Yard 
-credits:
-map connection: https://github.com/AlexElvers/scotland-yard-data# \
-map image: https://boardgamegeek.com/image/407682/scotland-yard
+
+**Credits:**
+* Map Data: https://github.com/AlexElvers/scotland-yard-data
+* Map Image: https://boardgamegeek.com/image/407682/scotland-yardd
 
 ## 🛠 Setup & Run
 
@@ -21,7 +22,7 @@ npm install
 ```bash
 cd server
 npx tsx src/index.ts
-# Runs on port 3000
+# Runs on port 3000 (you only need to expose the client, server traffic is proxied)
 ```
 
 ### 3. Start the Client
@@ -29,7 +30,7 @@ npx tsx src/index.ts
 ```bash
 cd client
 npm run dev
-# Runs on localhost:5173
+# Runs on port 5173
 ```
 
 ### Future Features
