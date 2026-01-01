@@ -50,3 +50,4 @@ npm run dev
 **AI Opponents:** Implement bot logic for AI-driven Detectives or Mr. X to support single-player practice modes.
 **Reveal Status Context:** Visually indicate the "last revealed" location on Mr. X's own screen to help the player track public knowledge.
 **Privacy Mode:** Add a "Hide Position" toggle for Mr. X's local client to prevent physical observers (shoulder surfers) from seeing the current location.
+**Find Players:** When clicking a player in the menu, the map should focus on that players position on the map

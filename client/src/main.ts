@@ -4,6 +4,7 @@ import { Network } from './Network';
 import { GameState, Player, Transport } from '../../shared/types'; 
 import { REVEAL_ROUNDS } from '../../shared/constants';
 
+// Same Palette as GameScene (Hex Strings)
 const DETECTIVE_COLORS_CSS = [
     '#EF4444', '#10B981', '#3B82F6', '#F59E0B', '#8B5CF6', '#EC4899'
 ];
@@ -20,6 +21,48 @@ const config: Phaser.Types.Core.GameConfig = {
 
 const game = new Phaser.Game(config);
 
+// --- DRAGGABLE HELPER ---
+function makeDraggable(element: HTMLElement, handle?: HTMLElement) {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    const dragHandle = handle || element;
+    
+    dragHandle.style.cursor = 'move';
+
+    dragHandle.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e: MouseEvent) {
+        e.preventDefault();
+        // Get the mouse cursor position at startup:
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // Call a function whenever the cursor moves:
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e: MouseEvent) {
+        e.preventDefault();
+        // Calculate the new cursor position:
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        
+        // set the element's new position:
+        element.style.top = (element.offsetTop - pos2) + "px";
+        element.style.left = (element.offsetLeft - pos1) + "px";
+        
+        // Important: Remove 'right' positioning if it exists so 'left' takes over
+        element.style.right = 'auto';
+    }
+
+    function closeDragElement() {
+        // stop moving when mouse button is released:
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- UI ELEMENTS ---
     const getEl = (id: string) => document.getElementById(id);
@@ -34,6 +77,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const lobbyDisplay = getEl('lobby-code-display');
     const playerList = getEl('player-list');
     const roundDisplay = getEl('round-display');
+    
+    // Make Game HUD Draggable
+    if (gameUi) {
+        // Try to find the h2 header to use as a handle, otherwise use the whole box
+        const header = gameUi.querySelector('h2') as HTMLElement;
+        makeDraggable(gameUi, header || gameUi);
+    }
     
     // Mr X Controls
     const mrxActions = getEl('mrx-actions');
