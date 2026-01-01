@@ -25,11 +25,37 @@ export class GameScene extends Phaser.Scene {
         this.myId = id;
     }
     
-    // Called by UI to toggle all players
     public setPlayersVisible(visible: boolean) {
         this.globalVisibility = visible;
         if (this.lastState) {
             this.updateGameState(this.lastState);
+        }
+    }
+
+    // --- NEW FOCUS METHOD ---
+    public focusOnPlayer(playerId: string) {
+        const player = this.currentPlayers.find(p => p.id === playerId);
+        if (!player) return;
+
+        let targetId = player.position;
+
+        // Special Logic for Mr. X
+        if (player.role === 'MR_X') {
+            // Use last known position instead of current (which might be 0/Hidden)
+            // Note: If Mr X is the local player, player.position IS the real position,
+            // but for observers/detectives it might be 0.
+            if (targetId === 0 && this.lastState) {
+                targetId = this.findLastKnownPosition(this.lastState.moveHistory);
+            }
+        }
+
+        // If still 0 (Hidden and no reveals yet), do nothing
+        if (targetId <= 0) return;
+
+        const node = (mapData.nodes as any)[targetId];
+        if (node) {
+            this.cameras.main.pan(node.x, node.y, 800, 'Power2');
+            this.cameras.main.zoomTo(1.5, 800, 'Power2');
         }
     }
 
@@ -160,20 +186,17 @@ export class GameScene extends Phaser.Scene {
     }
 
     public updateGameState(state: any) {
-        this.lastState = state; // Cache state
+        this.lastState = state; 
         this.currentPlayers = state.players as Player[];
         
-        // Create Tokens
         this.currentPlayers.forEach(p => {
             if (!this.playerTokens.has(p.id)) this.createPlayerToken(p);
         });
 
-        // Move Tokens
         this.currentPlayers.forEach(p => {
             const token = this.playerTokens.get(p.id);
             if (!token) return;
 
-            // If global visibility is OFF, hide everything and skip logic
             if (!this.globalVisibility) {
                 token.setVisible(false);
                 return;

@@ -20,7 +20,6 @@ const config: Phaser.Types.Core.GameConfig = {
 
 const game = new Phaser.Game(config);
 
-// --- DRAGGABLE HELPER WITH BOUNDS ---
 function makeDraggable(element: HTMLElement, handle?: HTMLElement) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     const dragHandle = handle || element;
@@ -43,15 +42,12 @@ function makeDraggable(element: HTMLElement, handle?: HTMLElement) {
         pos3 = e.clientX;
         pos4 = e.clientY;
         
-        // Calculate new positions
         let newTop = element.offsetTop - pos2;
         let newLeft = element.offsetLeft - pos1;
 
-        // --- BOUNDARY CONSTRAINTS ---
         const maxX = window.innerWidth - element.offsetWidth;
         const maxY = window.innerHeight - element.offsetHeight;
 
-        // Prevent moving off-screen
         if (newTop < 0) newTop = 0;
         if (newLeft < 0) newLeft = 0;
         if (newTop > maxY) newTop = maxY;
@@ -59,7 +55,7 @@ function makeDraggable(element: HTMLElement, handle?: HTMLElement) {
         
         element.style.top = newTop + "px";
         element.style.left = newLeft + "px";
-        element.style.right = 'auto'; // Important for absolute positioning
+        element.style.right = 'auto'; 
     }
 
     function closeDragElement() {
@@ -81,9 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const lobbyDisplay = getEl('lobby-code-display');
     const playerList = getEl('player-list');
     const roundDisplay = getEl('round-display');
-    const btnTogglePlayers = getEl('btn-toggle-players'); // NEW
+    const btnTogglePlayers = getEl('btn-toggle-players'); 
     
-    // Draggable Logic
     if (gameUi) {
         const header = gameUi.querySelector('h2') as HTMLElement;
         makeDraggable(gameUi, header || gameUi);
@@ -150,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- TOGGLE PLAYERS LOGIC ---
     if (btnTogglePlayers) {
         let playersVisible = true;
         btnTogglePlayers.onclick = () => {
@@ -270,6 +264,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     container.style.marginBottom = '5px';
                     container.style.backgroundColor = isTurn ? 'rgba(255,255,255,0.1)' : 'transparent';
                     container.style.borderLeft = isTurn ? `4px solid ${color}` : '4px solid transparent';
+                    container.style.cursor = 'pointer'; // Make clickable
+                    
+                    // --- CLICK TO FOCUS ---
+                    container.onclick = () => {
+                        const scene = game.scene.getScene('GameScene') as GameScene;
+                        if (scene) {
+                            scene.focusOnPlayer(p.id);
+                        }
+                    };
                     
                     const nameDiv = document.createElement('div');
                     nameDiv.style.fontWeight = 'bold';
