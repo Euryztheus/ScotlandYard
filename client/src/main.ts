@@ -1,10 +1,9 @@
 import Phaser from 'phaser';
 import { GameScene } from './GameScene';
 import { Network } from './Network';
-import { GameState, Player, Transport } from '../../shared/types'; 
+import { GameState, Player } from '../../shared/types'; 
 import { REVEAL_ROUNDS } from '../../shared/constants';
 
-// Same Palette as GameScene (Hex Strings)
 const DETECTIVE_COLORS_CSS = [
     '#EF4444', '#10B981', '#3B82F6', '#F59E0B', '#8B5CF6', '#EC4899'
 ];
@@ -21,43 +20,49 @@ const config: Phaser.Types.Core.GameConfig = {
 
 const game = new Phaser.Game(config);
 
-// --- DRAGGABLE HELPER ---
+// --- DRAGGABLE HELPER WITH BOUNDS ---
 function makeDraggable(element: HTMLElement, handle?: HTMLElement) {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     const dragHandle = handle || element;
     
     dragHandle.style.cursor = 'move';
-
     dragHandle.onmousedown = dragMouseDown;
 
     function dragMouseDown(e: MouseEvent) {
         e.preventDefault();
-        // Get the mouse cursor position at startup:
         pos3 = e.clientX;
         pos4 = e.clientY;
         document.onmouseup = closeDragElement;
-        // Call a function whenever the cursor moves:
         document.onmousemove = elementDrag;
     }
 
     function elementDrag(e: MouseEvent) {
         e.preventDefault();
-        // Calculate the new cursor position:
         pos1 = pos3 - e.clientX;
         pos2 = pos4 - e.clientY;
         pos3 = e.clientX;
         pos4 = e.clientY;
         
-        // set the element's new position:
-        element.style.top = (element.offsetTop - pos2) + "px";
-        element.style.left = (element.offsetLeft - pos1) + "px";
+        // Calculate new positions
+        let newTop = element.offsetTop - pos2;
+        let newLeft = element.offsetLeft - pos1;
+
+        // --- BOUNDARY CONSTRAINTS ---
+        const maxX = window.innerWidth - element.offsetWidth;
+        const maxY = window.innerHeight - element.offsetHeight;
+
+        // Prevent moving off-screen
+        if (newTop < 0) newTop = 0;
+        if (newLeft < 0) newLeft = 0;
+        if (newTop > maxY) newTop = maxY;
+        if (newLeft > maxX) newLeft = maxX;
         
-        // Important: Remove 'right' positioning if it exists so 'left' takes over
-        element.style.right = 'auto';
+        element.style.top = newTop + "px";
+        element.style.left = newLeft + "px";
+        element.style.right = 'auto'; // Important for absolute positioning
     }
 
     function closeDragElement() {
-        // stop moving when mouse button is released:
         document.onmouseup = null;
         document.onmousemove = null;
     }
@@ -72,24 +77,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnJoin = getEl('btn-join');
     const inputCode = getEl('input-code') as HTMLInputElement;
 
-    // Game HUD
     const gameUi = getEl('game-ui');
     const lobbyDisplay = getEl('lobby-code-display');
     const playerList = getEl('player-list');
     const roundDisplay = getEl('round-display');
+    const btnTogglePlayers = getEl('btn-toggle-players'); // NEW
     
-    // Make Game HUD Draggable
+    // Draggable Logic
     if (gameUi) {
-        // Try to find the h2 header to use as a handle, otherwise use the whole box
         const header = gameUi.querySelector('h2') as HTMLElement;
         makeDraggable(gameUi, header || gameUi);
     }
     
-    // Mr X Controls
     const mrxActions = getEl('mrx-actions');
     const btnUse2x = getEl('btn-use-2x');
 
-    // Lobby Screen
     const lobbyScreen = getEl('lobby-screen');
     const lobbyTitle = getEl('lobby-code-title');
     const lobbyPlayerList = getEl('lobby-player-list');
@@ -97,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnStart = getEl('btn-start');
     const btnClaimMrX = getEl('btn-claim-mrx');
 
-    // Settings
     const settingInfinite = getEl('setting-infinite') as HTMLInputElement;
     const inputs = {
         detTaxi: getEl('set-det-taxi') as HTMLInputElement,
@@ -110,22 +111,18 @@ document.addEventListener('DOMContentLoaded', () => {
         mrx2x: getEl('set-mrx-2x') as HTMLInputElement, 
     };
 
-    // Tracker Elements
     const trackerContainer = getEl('mrx-tracker');
     const trackerHistory = getEl('tracker-history');
     const trackerIcon = getEl('tracker-icon');
     const nextRevealDisplay = getEl('next-reveal-round');
     const trackerSummary = getEl('tracker-summary');
 
-    if (!menu || !lobbyScreen || !gameUi || !trackerContainer) {
-        console.error("UI Elements missing! Check index.html");
-        return; 
-    }
+    if (!menu || !lobbyScreen || !gameUi || !trackerContainer) return; 
 
     let currentLobbyCode = "???";
     let isDoubleMoveActive = false; 
 
-    // --- TRACKER TOGGLE LOGIC ---
+    // --- TRACKER LOGIC ---
     if (trackerContainer && trackerHistory && trackerIcon) {
         trackerContainer.onclick = () => {
             const isHidden = trackerHistory.style.display === 'none';
@@ -134,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // --- 2x BUTTON LOGIC ---
+    // --- 2x LOGIC ---
     if (btnUse2x) {
         btnUse2x.onclick = () => {
             isDoubleMoveActive = !isDoubleMoveActive;
@@ -153,11 +150,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- HELPER: Display Tickets ---
+    // --- TOGGLE PLAYERS LOGIC ---
+    if (btnTogglePlayers) {
+        let playersVisible = true;
+        btnTogglePlayers.onclick = () => {
+            playersVisible = !playersVisible;
+            btnTogglePlayers.innerText = playersVisible ? "👁️ Hide Players" : "👁️ Show Players";
+            
+            const scene = game.scene.getScene('GameScene') as GameScene;
+            if (scene) {
+                scene.setPlayersVisible(playersVisible);
+            }
+        };
+    }
+
     const formatTickets = (player: Player) => {
         const t = player.tickets;
         let html = `🚕${t.taxi} 🚌${t.bus} 🚇${t.underground}`;
-        
         if (player.role === 'MR_X') {
             html += ` 🏴${t.black}`;
             html += ` <span style="color: #d69e2e; font-weight: bold; margin-left: 5px;">2x: ${player.doubleTickets}</span>`;
@@ -165,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return html;
     };
 
-    // --- GAME STATE HANDLER ---
     const onGameStateUpdate = (data: any) => {
         let state: GameState = data.gameState || data;
         if (state.lobbyCode) currentLobbyCode = state.lobbyCode;
@@ -173,7 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const myId = network.getID();
         const me = state.players.find((p: Player) => p.id === myId);
 
-        // --- PHASE 1: LOBBY ---
         if (state.phase === 'LOBBY') {
             menu!.style.display = 'none';
             gameUi!.style.display = 'none';
@@ -209,7 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 btnReady.style.backgroundColor = me.isReady ? "#28a745" : "#555";
             }
 
-            // Sync Settings (Host Logic)
             if (state.settings && settingInfinite) {
                 if (!me?.isHost || document.activeElement?.tagName !== 'INPUT') {
                     settingInfinite.checked = state.settings.infiniteTickets;
@@ -231,7 +237,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const allReady = state.players.length > 0 && state.players.every(p => p.isReady);
             if (btnStart) btnStart.style.display = (isHost && allReady) ? 'block' : 'none';
 
-        // --- PHASE 2: PLAYING ---
         } else if (state.phase === 'PLAYING') {
             menu!.style.display = 'none';
             lobbyScreen!.style.display = 'none';
@@ -240,20 +245,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if(lobbyDisplay) lobbyDisplay.innerText = currentLobbyCode;
             if(roundDisplay) roundDisplay.innerText = state.round.toString();
 
-            // Render Player List
             if (playerList) {
                 playerList.innerHTML = '';
                 
-                // Sort detectives for consistent coloring
                 const detectives = state.players
                     .filter(pl => pl.role === 'DETECTIVE')
                     .sort((a, b) => a.id.localeCompare(b.id));
 
                 state.players.forEach((p: Player) => {
                     const container = document.createElement('div');
-                    
-                    // Determine Color
-                    let color = '#aaaaaa'; // Default Grey (Mr X)
+                    let color = '#aaaaaa'; 
                     if (p.role === 'DETECTIVE') {
                         const idx = detectives.findIndex(d => d.id === p.id);
                         if (idx !== -1) {
@@ -268,7 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     container.style.padding = '8px';
                     container.style.marginBottom = '5px';
                     container.style.backgroundColor = isTurn ? 'rgba(255,255,255,0.1)' : 'transparent';
-                    // Use the player's color for the border indicator
                     container.style.borderLeft = isTurn ? `4px solid ${color}` : '4px solid transparent';
                     
                     const nameDiv = document.createElement('div');
@@ -287,7 +287,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            // Show/Hide 2x Button
             if (mrxActions && me?.role === 'MR_X') {
                 mrxActions.style.display = (state.turn === myId && !state.pendingDoubleMove) ? 'block' : 'none';
                 if(btnUse2x) btnUse2x.disabled = (me.doubleTickets <= 0);
@@ -302,7 +301,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // --- MR X TRACKER UPDATE ---
             if (trackerHistory && nextRevealDisplay && trackerSummary) {
                 const nextReveal = REVEAL_ROUNDS.find(r => r > state.round) || "END";
                 nextRevealDisplay.innerText = nextReveal.toString();

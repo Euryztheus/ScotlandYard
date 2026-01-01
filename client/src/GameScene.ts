@@ -2,7 +2,6 @@ import Phaser from 'phaser';
 import mapData from '../../shared/mapData.json'; 
 import { Player } from '../../shared/types';
 
-// Distinct colors for detectives (Red, Green, Blue, Orange, Purple, Pink)
 const DETECTIVE_COLORS = [
     0xEF4444, 0x10B981, 0x3B82F6, 0xF59E0B, 0x8B5CF6, 0xEC4899
 ];
@@ -13,6 +12,10 @@ export class GameScene extends Phaser.Scene {
     private myId: string = "";
     private activePopup: Phaser.GameObjects.Container | null = null; 
     private menuBlocker: Phaser.GameObjects.Rectangle | null = null; 
+    
+    // --- VISIBILITY FLAGS ---
+    private globalVisibility: boolean = true;
+    private lastState: any = null;
 
     constructor() {
         super('GameScene');
@@ -20,6 +23,14 @@ export class GameScene extends Phaser.Scene {
 
     public setMyId(id: string) {
         this.myId = id;
+    }
+    
+    // Called by UI to toggle all players
+    public setPlayersVisible(visible: boolean) {
+        this.globalVisibility = visible;
+        if (this.lastState) {
+            this.updateGameState(this.lastState);
+        }
     }
 
     preload() {
@@ -149,6 +160,7 @@ export class GameScene extends Phaser.Scene {
     }
 
     public updateGameState(state: any) {
+        this.lastState = state; // Cache state
         this.currentPlayers = state.players as Player[];
         
         // Create Tokens
@@ -160,6 +172,12 @@ export class GameScene extends Phaser.Scene {
         this.currentPlayers.forEach(p => {
             const token = this.playerTokens.get(p.id);
             if (!token) return;
+
+            // If global visibility is OFF, hide everything and skip logic
+            if (!this.globalVisibility) {
+                token.setVisible(false);
+                return;
+            }
 
             if (p.role === 'DETECTIVE') {
                 this.moveToken(token, p.position, 1.0);
@@ -206,16 +224,13 @@ export class GameScene extends Phaser.Scene {
     private createPlayerToken(p: Player) {
         const container = this.add.container(0, 0).setDepth(100);
         
-        let color = 0x000000; // Default Black (Mr. X)
+        let color = 0x000000; 
         
         if (p.role === 'DETECTIVE') {
-            // Logic to assign specific color based on ID sort order
-            // 1. Filter Detectives
             const detectives = this.currentPlayers
                 .filter(pl => pl.role === 'DETECTIVE')
-                .sort((a, b) => a.id.localeCompare(b.id)); // Consistent Sort
+                .sort((a, b) => a.id.localeCompare(b.id)); 
             
-            // 2. Find Index
             const index = detectives.findIndex(pl => pl.id === p.id);
             if (index !== -1) {
                 color = DETECTIVE_COLORS[index % DETECTIVE_COLORS.length];
@@ -223,8 +238,7 @@ export class GameScene extends Phaser.Scene {
         }
         
         const circle = this.add.circle(0, 0, 15, color).setStrokeStyle(2, 0xffffff);
-        
-        container.add([circle]); 
+        container.add([circle]);
         this.playerTokens.set(p.id, container);
     }
 
