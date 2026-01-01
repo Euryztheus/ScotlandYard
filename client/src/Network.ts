@@ -12,7 +12,7 @@ export class Network {
     ) {
         this.onStateChange = onStateChange;
         this.onGameOver = onGameOver;
-        this.socket = io('http://localhost:3000');
+        this.socket = io();
 
         this.socket.on('connect', () => {
             console.log('Connected to server with ID:', this.socket.id);
