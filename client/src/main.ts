@@ -30,6 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const lobbyDisplay = getEl('lobby-code-display');
     const playerList = getEl('player-list');
     const roundDisplay = getEl('round-display');
+    
+    // Mr X Controls
+    const mrxActions = getEl('mrx-actions');
+    const btnUse2x = getEl('btn-use-2x');
 
     // Lobby Screen
     const lobbyScreen = getEl('lobby-screen');
@@ -49,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mrxBus: getEl('set-mrx-bus') as HTMLInputElement,
         mrxUnd: getEl('set-mrx-und') as HTMLInputElement,
         mrxBlack: getEl('set-mrx-black') as HTMLInputElement,
+        mrx2x: getEl('set-mrx-2x') as HTMLInputElement, // NEW
     };
 
     // Tracker Elements
@@ -58,13 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextRevealDisplay = getEl('next-reveal-round');
     const trackerSummary = getEl('tracker-summary');
 
-    // CRITICAL: Check if tracker exists
     if (!menu || !lobbyScreen || !gameUi || !trackerContainer) {
         console.error("UI Elements missing! Check index.html");
         return; 
     }
 
     let currentLobbyCode = "???";
+    let isDoubleMoveActive = false; // Track button state
 
     // --- TRACKER TOGGLE LOGIC ---
     if (trackerContainer && trackerHistory && trackerIcon) {
@@ -75,10 +80,36 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
+    // --- 2x BUTTON LOGIC ---
+    if (btnUse2x) {
+        btnUse2x.onclick = () => {
+            isDoubleMoveActive = !isDoubleMoveActive;
+            update2xButtonVisuals();
+        };
+    }
+
+    const update2xButtonVisuals = () => {
+        if (!btnUse2x) return;
+        if (isDoubleMoveActive) {
+            btnUse2x.classList.add('active');
+            btnUse2x.innerText = "CANCEL 2x";
+        } else {
+            btnUse2x.classList.remove('active');
+            btnUse2x.innerText = "USE 2x TICKET";
+        }
+    };
+
     // --- HELPER: Display Tickets ---
-    const formatTickets = (tickets: Record<Transport, number>) => {
-        if (!tickets) return "";
-        return `🚕${tickets.taxi} 🚌${tickets.bus} 🚇${tickets.underground} 🏴${tickets.black}`;
+    const formatTickets = (player: Player) => {
+        const t = player.tickets;
+        let html = `🚕${t.taxi} 🚌${t.bus} 🚇${t.underground}`;
+        
+        if (player.role === 'MR_X') {
+            html += ` 🏴${t.black}`;
+            // Show double tickets
+            html += ` <span style="color: #d69e2e; font-weight: bold; margin-left: 5px;">2x: ${player.doubleTickets}</span>`;
+        }
+        return html;
     };
 
     // --- GAME STATE HANDLER ---
@@ -136,6 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if(inputs.mrxBus) inputs.mrxBus.value = state.settings.mrXStartTickets.bus.toString();
                     if(inputs.mrxUnd) inputs.mrxUnd.value = state.settings.mrXStartTickets.underground.toString();
                     if(inputs.mrxBlack) inputs.mrxBlack.value = (state.settings.mrXStartTickets.black ?? 0).toString();
+                    if(inputs.mrx2x) inputs.mrx2x.value = (state.settings.mrXDoubleTickets ?? 2).toString();
                 }
             }
             
@@ -178,12 +210,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     ticketDiv.style.fontSize = '12px';
                     ticketDiv.style.marginTop = '2px';
                     ticketDiv.style.color = '#ddd';
-                    ticketDiv.innerText = formatTickets(p.tickets);
+                    ticketDiv.innerHTML = formatTickets(p);
 
                     container.appendChild(nameDiv);
                     container.appendChild(ticketDiv);
                     playerList.appendChild(container);
                 });
+            }
+
+            // Show/Hide 2x Button
+            if (mrxActions && me?.role === 'MR_X') {
+                mrxActions.style.display = (state.turn === myId && !state.pendingDoubleMove) ? 'block' : 'none';
+                if(btnUse2x) btnUse2x.disabled = (me.doubleTickets <= 0);
+            } else if (mrxActions) {
+                mrxActions.style.display = 'none';
+            }
+
+            // Logic to disable button if already pending
+            if (state.pendingDoubleMove && me?.role === 'MR_X') {
+                // If we are pending a double move, we are already IN it.
+                // Reset visual state
+                if (isDoubleMoveActive) {
+                    isDoubleMoveActive = false;
+                    update2xButtonVisuals();
+                }
             }
 
             // --- MR X TRACKER UPDATE ---
@@ -229,6 +279,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             posSpan.innerText = '???';
                             posSpan.style.color = '#555';
                         }
+                        
+                        // Show "2x" tag
+                        if (move.isDoubleMove) {
+                             const doubleTag = document.createElement('span');
+                             doubleTag.innerText = ' (2x)';
+                             doubleTag.style.color = '#d69e2e';
+                             doubleTag.style.marginLeft = '5px';
+                             posSpan.appendChild(doubleTag);
+                        }
 
                         if (REVEAL_ROUNDS.includes(move.round)) {
                             row.style.borderLeft = '2px solid #f6e05e';
@@ -253,10 +312,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     const onGameOver = (data: { winner: string, reason: string }) => {
-        // Simple Alert for now (or replace with a nice DOM overlay)
         setTimeout(() => {
             alert(`GAME OVER!\nWinner: ${data.winner}\nReason: ${data.reason}`);
-            // Reload page to reset to menu
             window.location.reload();
         }, 100);
     };
@@ -284,14 +341,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 bus: parseInt(inputs.mrxBus.value) || 0,
                 underground: parseInt(inputs.mrxUnd.value) || 0,
                 black: parseInt(inputs.mrxBlack.value) || 0 
-            }
+            },
+            mrXDoubleTickets: parseInt(inputs.mrx2x.value) || 0 // NEW
         });
     };
 
     if(settingInfinite) settingInfinite.onchange = handleSettingsChange;
     Object.values(inputs).forEach(input => { if(input) input.onchange = handleSettingsChange; });
 
+    // INTERCEPT PHASER MOVE REQUEST
     game.events.on('request_move', (data: any) => {
-        network.sendMove(data.toNode, data.transport, data.useBlackTicket);
+        // Send move with current button state
+        network.sendMove(data.toNode, data.transport, data.useBlackTicket, isDoubleMoveActive);
+        
+        // Reset 2x button state after move is sent
+        if (isDoubleMoveActive) {
+            isDoubleMoveActive = false;
+            update2xButtonVisuals();
+        }
     });
 });

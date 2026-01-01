@@ -1,7 +1,8 @@
 import { GameSettings } from "./types.ts";
 
 export const DEFAULT_SETTINGS: GameSettings = {
-    mrXStartTickets: { taxi: 4, bus: 3, underground: 3, black: 2 }, // Reduced for testing
+    mrXStartTickets: { taxi: 4, bus: 3, underground: 3, black: 4 }, 
+    mrXDoubleTickets: 2,
     detectiveStartTickets: { taxi: 10, bus: 8, underground: 4, black: 0 },
     infiniteTickets: false
 };

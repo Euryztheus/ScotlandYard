@@ -42,9 +42,9 @@ export class Network {
         this.socket.emit('join_game', code);
     }
 
-    public sendMove(toNode: number, transport: string, useBlackTicket: boolean = false) {
-        console.log(`Sending move: Node ${toNode} via ${transport} (Black: ${useBlackTicket})`);
-        this.socket.emit('player_move', { toNode, transport, useBlackTicket });
+    public sendMove(toNode: number, transport: string, useBlackTicket: boolean = false, useDoubleTicket: boolean = false) {
+        console.log(`Sending move: Node ${toNode} via ${transport} (Black: ${useBlackTicket}, 2x: ${useDoubleTicket})`);
+        this.socket.emit('player_move', { toNode, transport, useBlackTicket, useDoubleTicket });
     }
 
     public getID(): string {

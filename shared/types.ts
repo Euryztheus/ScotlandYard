@@ -20,6 +20,7 @@ export interface MapData {
 
 export interface GameSettings {
     mrXStartTickets: Record<Transport, number>;
+    mrXDoubleTickets: number;
     detectiveStartTickets: Record<Transport, number>;
     infiniteTickets: boolean;
 }
@@ -29,15 +30,17 @@ export interface Player {
     role: 'MR_X' | 'DETECTIVE';
     position: number;
     tickets: Record<Transport, number>;
+    doubleTickets: number;
     isReady: boolean; 
     isHost: boolean; 
 }
 
 export interface MoveRecord {
     round: number;
-    transport: Transport; // 'taxi', 'bus', 'underground', or 'black'
-    position?: number;    // Only present if revealed
+    transport: Transport; 
+    position?: number;    
     isHidden: boolean;
+    isDoubleMove?: boolean;
 }
 
 export interface GameState {
@@ -48,4 +51,5 @@ export interface GameState {
     round: number;
     settings: GameSettings;
     moveHistory: MoveRecord[];
+    pendingDoubleMove?: boolean; 
 }

@@ -11,6 +11,13 @@
       ::-webkit-scrollbar { width: 6px; }
       ::-webkit-scrollbar-track { background: #333; }
       ::-webkit-scrollbar-thumb { background: #555; border-radius: 3px; }
+      
+      .btn-2x {
+          background: #333; color: #fff; border: 1px solid #555; padding: 5px 10px; cursor: pointer; width: 100%; margin-top: 5px;
+      }
+      .btn-2x.active {
+          background: #d69e2e; color: #000; font-weight: bold; border-color: #d69e2e;
+      }
     </style>
   </head>
   <body>
@@ -52,7 +59,9 @@
                         Taxi: <input type="number" id="set-mrx-taxi" style="width: 40px;" min="0"><br>
                         Bus: <input type="number" id="set-mrx-bus" style="width: 40px; margin-top: 2px;" min="0"><br>
                         Und: <input type="number" id="set-mrx-und" style="width: 40px; margin-top: 2px;" min="0"><br>
-                        Black: <input type="number" id="set-mrx-black" style="width: 40px; margin-top: 2px;" min="0">
+                        Black: <input type="number" id="set-mrx-black" style="width: 40px; margin-top: 2px;" min="0"><br>
+                        <hr style="border-color: #555; margin: 5px 0;">
+                        2x Tickets: <input type="number" id="set-mrx-2x" style="width: 40px;" min="0" max="5">
                     </div>
                 </div>
             </div>
@@ -70,6 +79,10 @@
         </h2>
         
         <div id="player-list"></div>
+
+        <div id="mrx-actions" style="display: none; margin-top: 10px; border-top: 1px solid #555; padding-top: 5px;">
+            <button id="btn-use-2x" class="btn-2x">USE 2x TICKET</button>
+        </div>
 
         <div id="mrx-tracker" style="margin-top: 15px; border-top: 1px solid #555; padding-top: 10px; cursor: pointer;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
