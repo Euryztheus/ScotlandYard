@@ -4,6 +4,10 @@ import { Network } from './Network';
 import { GameState, Player, Transport } from '../../shared/types'; 
 import { REVEAL_ROUNDS } from '../../shared/constants';
 
+const DETECTIVE_COLORS_CSS = [
+    '#EF4444', '#10B981', '#3B82F6', '#F59E0B', '#8B5CF6', '#EC4899'
+];
+
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
     width: window.innerWidth,
@@ -53,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mrxBus: getEl('set-mrx-bus') as HTMLInputElement,
         mrxUnd: getEl('set-mrx-und') as HTMLInputElement,
         mrxBlack: getEl('set-mrx-black') as HTMLInputElement,
-        mrx2x: getEl('set-mrx-2x') as HTMLInputElement, // NEW
+        mrx2x: getEl('set-mrx-2x') as HTMLInputElement, 
     };
 
     // Tracker Elements
@@ -69,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let currentLobbyCode = "???";
-    let isDoubleMoveActive = false; // Track button state
+    let isDoubleMoveActive = false; 
 
     // --- TRACKER TOGGLE LOGIC ---
     if (trackerContainer && trackerHistory && trackerIcon) {
@@ -106,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (player.role === 'MR_X') {
             html += ` 🏴${t.black}`;
-            // Show double tickets
             html += ` <span style="color: #d69e2e; font-weight: bold; margin-left: 5px;">2x: ${player.doubleTickets}</span>`;
         }
         return html;
@@ -189,10 +192,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Render Player List
             if (playerList) {
-                playerList.innerHTML = ''; 
+                playerList.innerHTML = '';
+                
+                // Sort detectives for consistent coloring
+                const detectives = state.players
+                    .filter(pl => pl.role === 'DETECTIVE')
+                    .sort((a, b) => a.id.localeCompare(b.id));
+
                 state.players.forEach((p: Player) => {
                     const container = document.createElement('div');
-                    const color = p.role === 'MR_X' ? '#aaaaaa' : '#4299e1'; 
+                    
+                    // Determine Color
+                    let color = '#aaaaaa'; // Default Grey (Mr X)
+                    if (p.role === 'DETECTIVE') {
+                        const idx = detectives.findIndex(d => d.id === p.id);
+                        if (idx !== -1) {
+                            color = DETECTIVE_COLORS_CSS[idx % DETECTIVE_COLORS_CSS.length];
+                        }
+                    }
+
                     const isTurn = state.turn === p.id;
                     const isMe = p.id === myId ? " (YOU)" : "";
 
@@ -200,6 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     container.style.padding = '8px';
                     container.style.marginBottom = '5px';
                     container.style.backgroundColor = isTurn ? 'rgba(255,255,255,0.1)' : 'transparent';
+                    // Use the player's color for the border indicator
                     container.style.borderLeft = isTurn ? `4px solid ${color}` : '4px solid transparent';
                     
                     const nameDiv = document.createElement('div');
@@ -226,10 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 mrxActions.style.display = 'none';
             }
 
-            // Logic to disable button if already pending
             if (state.pendingDoubleMove && me?.role === 'MR_X') {
-                // If we are pending a double move, we are already IN it.
-                // Reset visual state
                 if (isDoubleMoveActive) {
                     isDoubleMoveActive = false;
                     update2xButtonVisuals();
@@ -280,7 +296,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             posSpan.style.color = '#555';
                         }
                         
-                        // Show "2x" tag
                         if (move.isDoubleMove) {
                              const doubleTag = document.createElement('span');
                              doubleTag.innerText = ' (2x)';
@@ -303,7 +318,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Update Map
             const scene = game.scene.getScene('GameScene') as GameScene;
             if (scene) {
                 scene.setMyId(network.getID());
@@ -320,7 +334,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const network = new Network(onGameStateUpdate, onGameOver);
 
-    // --- EVENT LISTENERS ---
     if(btnCreate) btnCreate.onclick = () => network.createGame();
     if(btnJoin) btnJoin.onclick = () => network.joinGame(inputCode.value.toUpperCase());
     if(btnReady) btnReady.onclick = () => network.toggleReady();
@@ -342,19 +355,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 underground: parseInt(inputs.mrxUnd.value) || 0,
                 black: parseInt(inputs.mrxBlack.value) || 0 
             },
-            mrXDoubleTickets: parseInt(inputs.mrx2x.value) || 0 // NEW
+            mrXDoubleTickets: parseInt(inputs.mrx2x.value) || 0 
         });
     };
 
     if(settingInfinite) settingInfinite.onchange = handleSettingsChange;
     Object.values(inputs).forEach(input => { if(input) input.onchange = handleSettingsChange; });
 
-    // INTERCEPT PHASER MOVE REQUEST
     game.events.on('request_move', (data: any) => {
-        // Send move with current button state
         network.sendMove(data.toNode, data.transport, data.useBlackTicket, isDoubleMoveActive);
         
-        // Reset 2x button state after move is sent
         if (isDoubleMoveActive) {
             isDoubleMoveActive = false;
             update2xButtonVisuals();
