@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     const mrxActions = getEl('mrx-actions');
-    const btnUse2x = getEl('btn-use-2x');
+    const btnUse2x = getEl('btn-use-2x') as HTMLButtonElement;
 
     const lobbyScreen = getEl('lobby-screen');
     const lobbyTitle = getEl('lobby-code-title');
