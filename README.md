@@ -8,30 +8,37 @@
 
 ### 1. Install Dependencies
 ```bash
-# Server
-cd server
-npm install
-
-# Client
-cd ../client
 npm install
 ```
 
-### 2. Start the Server
+### 2. Development
 
+Start the server (hot-reload with tsx):
 ```bash
-cd server
-npx tsx src/index.ts
-# Runs on port 3000 (you only need to expose the client, server traffic is proxied)
+npm run dev --workspace=server
+# Runs on port 3000
 ```
 
-### 3. Start the Client
-
+Start the client:
 ```bash
-cd client
-npm run dev
+npm run dev --workspace=client
 # Runs on port 5173
 ```
+
+### 3. Production Build
+
+Build both server and client:
+```bash
+npm run build
+```
+
+Start the compiled server:
+```bash
+npm run server:start
+# Runs on port 3000
+```
+
+The client builds to `client/dist/` as static files. Serve with nginx and proxy WebSocket traffic to the server on port 3000.
 
 ### Future Features
 **Enhanced Game Over UI:** Replace intrusive browser alerts with a dedicated, styled result summary modal. \
