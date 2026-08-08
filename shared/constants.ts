@@ -1,4 +1,4 @@
-import { GameSettings } from "./types.ts";
+import type { GameSettings } from "./types.js";
 
 export const DEFAULT_SETTINGS: GameSettings = {
     mrXStartTickets: { taxi: 4, bus: 3, underground: 3, black: 4 }, 
