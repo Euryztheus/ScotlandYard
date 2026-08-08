@@ -1,9 +1,9 @@
 import express from 'express';
 import { createServer } from 'http';
 import { Server, Socket } from 'socket.io';
-import type { GameState, GameSettings, Player, Transport} from '../../shared/types.ts';
-import { DEFAULT_SETTINGS, REVEAL_ROUNDS } from '../../shared/constants.ts'; 
-import mapData from '../../shared/mapData.json' assert { type: "json" };
+import type { GameState, GameSettings, Player, Transport} from '../../shared/types.js';
+import { DEFAULT_SETTINGS, REVEAL_ROUNDS } from '../../shared/constants.js';
+import mapData from '../../shared/mapData.json' with { type: "json" };
 
 const app = express();
 const httpServer = createServer(app);

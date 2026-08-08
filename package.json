@@ -1,0 +1,17 @@
+{
+  "name": "scotland-yard",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client",
+    "shared"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace=server && npm run build --workspace=client",
+    "start": "npm run start --workspace=server",
+    "server:build": "npm run build --workspace=server",
+    "server:start": "npm run start --workspace=server",
+    "client:build": "npm run build --workspace=client"
+  }
+}
