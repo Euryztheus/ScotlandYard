@@ -4,7 +4,7 @@ import sys
 STATIONS_PATH = "stations.txt"
 CONNECTIONS_PATH = "connections.txt"
 POSITIONS_PATH = "node_positions.json"
-OUTPUT_PATH = "shared/mapData.json"
+OUTPUT_PATH = "shared/src/mapData.json"
 
 # If False: crash if any station is missing a clicked position.
 # If True: stations with missing positions are excluded.

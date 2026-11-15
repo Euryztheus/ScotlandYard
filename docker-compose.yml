@@ -1,0 +1,25 @@
+services:
+  app:
+    build:
+      context: .
+    image: scotland-yard:latest
+    container_name: scotland-yard
+    restart: unless-stopped
+    init: true
+    stop_grace_period: 15s
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/healthz"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

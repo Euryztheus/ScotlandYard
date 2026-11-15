@@ -1,54 +1,144 @@
-# Scotland Yard 
+# Scotland Yard
+
+A real-time multiplayer implementation of the Scotland Yard board game.
 
 **Credits:**
-* Map Data: https://github.com/AlexElvers/scotland-yard-data
-* Map Image: https://boardgamegeek.com/image/407682/scotland-yardd
 
-## 🛠 Setup & Run
+- Map Data: https://github.com/AlexElvers/scotland-yard-data
+- Map Image: https://boardgamegeek.com/image/407682/scotland-yardd
 
-### 1. Install Dependencies
+## Stack
+
+- **client** — Vite + TypeScript + Phaser, vanilla DOM for the HUD
+- **server** — Express + Socket.IO, in-memory game state
+- **shared** — domain types, Socket.IO event contracts, map data and helpers
+
+The server is a modular monolith. The game engine (`server/src/game/rules`) is
+pure TypeScript and can be tested without sockets. The HTTP/Socket.IO layers are
+adapters around it.
+
+## Development
+
+Install dependencies once from the repository root:
+
 ```bash
 npm install
 ```
 
-### 2. Development
+Start the server:
 
-Start the server (hot-reload with tsx):
 ```bash
-npm run dev --workspace=server
-# Runs on port 3000
+npm run dev:server
+# http://localhost:3000
 ```
 
-Start the client:
+Start the client in another terminal:
+
 ```bash
-npm run dev --workspace=client
-# Runs on port 5173
+npm run dev:client
+# http://localhost:5173
 ```
 
-### 3. Production Build
+Vite proxies `/socket.io` to the server, so the client always connects
+same-origin.
 
-Build both server and client:
+## Checks
+
 ```bash
+npm run typecheck
+npm test
 npm run build
 ```
 
-Start the compiled server:
+## Production with Docker
+
+The image builds the client and server, and the server serves both the static
+client and Socket.IO on one port. This keeps the deployment to a single
+container and avoids CORS/proxy configuration inside the app.
+
 ```bash
-npm run server:start
-# Runs on port 3000
+docker compose up -d --build
 ```
 
-The client builds to `client/dist/` as static files. Serve with nginx and proxy WebSocket traffic to the server on port 3000.
+The container listens on `127.0.0.1:3000`. Put your existing nginx in front of it
+for TLS:
 
-### Future Features
-**Enhanced Game Over UI:** Replace intrusive browser alerts with a dedicated, styled result summary modal. \
-**Session Reconnection:** Implement `localStorage`-based session persistence. Allow clients to automatically rejoin their active seat and role upon page reload or reconnection. \
-**Spectator Mode:** Add a "Join as Spectator" lobby option, allowing users to observe real-time game state without move permissions. \
-**Turn Timer:** Enforce time limits on server-side turns; automatically execute a random valid move if the timer expires to prevent stalling. \
-**Simultaneous Detective Phase:** Decouple detective turns to allow all detectives to submit moves asynchronously during their collective phase, rather than sequentially. \
-**Multi-Agent Control:** Enable support for a single client to control multiple Detective characters from one interface/tab. \
-**Token Collision Handling:** Implement visual offsetting for nodes occupied by multiple players, rendering tokens side-by-side instead of stacking them. \
-**Map Selection:** Integrate the official board assets and add a lobby setting to toggle between different map visualizations. \
-**Visual Move History:** Enhance the UI to display a graphical log of Mr. X's moves, clearly indicating used tickets and revealed locations. \
-**AI Opponents:** Implement bot logic for AI-driven Detectives or Mr. X to support single-player practice modes. \
-**Reveal Status Context:** Visually indicate the "last revealed" location on Mr. X's own screen to help the player track public knowledge. \
+```nginx
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    ''      close;
+}
+
+server {
+    listen 443 ssl;
+    server_name yard.example.com;
+
+    # ssl_certificate / ssl_certificate_key ...
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_read_timeout 3600s;
+    }
+}
+```
+
+`restart: unless-stopped` restarts the container after a crash and after a VPS
+reboot. Make sure the Docker daemon is enabled on boot:
+
+```bash
+sudo systemctl enable --now docker
+```
+
+Useful commands:
+
+```bash
+docker compose logs -f
+docker compose up -d --build   # rebuild and restart after a code change
+docker compose restart
+```
+
+The server exposes `GET /healthz` for Docker and uptime checks.
+
+### State and restarts
+
+Game state is currently held in memory. Restarting the container, deploying, or
+rebooting the VPS ends active games. Reconnection and persistence are follow-up
+features; they are intentionally out of scope for the current refactor.
+
+## Project layout
+
+```text
+shared/src/
+  types.ts        domain model
+  events.ts       typed Socket.IO contracts
+  constants.ts    defaults and reveal rounds
+  map.ts          typed map access + move helpers
+  mapData.json    generated map data
+
+server/src/
+  index.ts        bootstrap + graceful shutdown
+  config.ts       environment configuration
+  http/app.ts     Express, static client, /healthz
+  realtime/       Socket.IO setup, handlers, broadcasts
+  game/           store, factory, engine, rules, state projection
+  util/           lobby code generation
+
+client/src/
+  main.ts         bootstrap
+  app/            GameClient coordinator
+  network/        typed socket wrapper
+  ui/             screens and components
+  game/           Phaser scene, map, tokens, transport menu, camera
+  styles/         CSS
+```
+
+## Map tooling
+
+The root-level Python scripts generate `shared/src/mapData.json` from
+`stations.txt`, `connections.txt` and `node_positions.json`.

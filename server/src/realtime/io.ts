@@ -1,0 +1,30 @@
+import type { Server as HttpServer } from 'node:http';
+import { Server } from 'socket.io';
+import { GameStore } from '../game/GameStore.ts';
+import { registerGameHandlers } from './handlers/game.ts';
+import { registerLobbyHandlers } from './handlers/lobby.ts';
+import { registerSettingsHandlers } from './handlers/settings.ts';
+import type { GameServer } from './types.ts';
+
+export function createSocketServer(httpServer: HttpServer): GameServer {
+    const io: GameServer = new Server(httpServer);
+    const store = new GameStore();
+
+    io.on('connection', socket => {
+        console.log('User connected:', socket.id);
+
+        registerLobbyHandlers(io, socket, store);
+        registerGameHandlers(io, socket, store);
+        registerSettingsHandlers(io, socket, store);
+
+        socket.on('disconnect', () => {
+            console.log('User disconnected:', socket.id);
+        });
+    });
+
+    io.engine.on('connection_error', error => {
+        console.warn('[socket.io] connection error', error.message);
+    });
+
+    return io;
+}
