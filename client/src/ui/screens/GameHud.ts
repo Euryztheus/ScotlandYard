@@ -8,6 +8,12 @@ export interface GameHudCallbacks {
     onFocusPlayer: (playerId: string) => void;
     onTogglePlayers: (visible: boolean) => void;
     onToggleDouble: () => void;
+    onLeave: () => void;
+}
+
+function seatLabel(player: Player | undefined): string {
+    if (!player) return '';
+    return player.role === 'MR_X' ? 'MR. X' : `DET ${player.seat}`;
 }
 
 export class GameHud {
@@ -15,17 +21,19 @@ export class GameHud {
     private readonly header = element('h2', 'hud-header');
     private readonly lobbyCode = element('span', 'lobby-code', '???');
     private readonly roundDisplay = element('span', 'round-display', '0');
+    private readonly banner = element('div', 'hud-banner');
     private readonly playerList = new PlayerList();
     private readonly tracker = new MrXTracker();
     private readonly mrxActions = element('div', 'mrx-actions');
     private readonly doubleButton: HTMLButtonElement;
     private readonly togglePlayersButton: HTMLButtonElement;
+    private readonly leaveButton: HTMLButtonElement;
     private playersVisible = true;
 
     constructor(private readonly callbacks: GameHudCallbacks) {
         this.header.append(
             element('span', 'hud-status-dot'),
-            document.createTextNode('LOBBY: '),
+            document.createTextNode('GAME: '),
             this.lobbyCode
         );
 
@@ -39,14 +47,28 @@ export class GameHud {
         trackerSlot.append(this.tracker.root);
 
         this.togglePlayersButton = element('button', 'btn-util', 'HIDE TOKENS');
+        this.leaveButton = element('button', 'btn-util', 'LEAVE GAME');
         const footer = element('div', 'hud-footer');
-        footer.append('ROUND ', this.roundDisplay, this.togglePlayersButton);
+        footer.append(
+            'ROUND ',
+            this.roundDisplay,
+            this.togglePlayersButton,
+            this.leaveButton
+        );
 
-        this.root.append(this.header, playerSlot, this.mrxActions, trackerSlot, footer);
+        this.root.append(
+            this.header,
+            this.banner,
+            playerSlot,
+            this.mrxActions,
+            trackerSlot,
+            footer
+        );
         makeDraggable(this.root, this.header);
 
         this.doubleButton.addEventListener('click', () => callbacks.onToggleDouble());
         this.togglePlayersButton.addEventListener('click', () => this.togglePlayers());
+        this.leaveButton.addEventListener('click', () => callbacks.onLeave());
     }
 
     show(): void {
@@ -57,18 +79,49 @@ export class GameHud {
         setHidden(this.root, true);
     }
 
-    render(state: GameState, me: Player | undefined, myId: string, doubleActive: boolean): void {
+    render(state: GameState, ownerId: string, doubleActive: boolean): void {
         this.lobbyCode.textContent = state.lobbyCode;
         this.roundDisplay.textContent = String(state.round);
 
-        this.playerList.render(state.players, state.turn, myId, this.callbacks.onFocusPlayer);
+        this.playerList.render(
+            state.players,
+            state.users,
+            state.turn,
+            ownerId,
+            this.callbacks.onFocusPlayer
+        );
         this.tracker.render(state.moveHistory, state.round);
 
+        const mySeats = state.players.filter(player => player.ownerId === ownerId);
+        const myMrX = mySeats.find(player => player.role === 'MR_X');
+        const active = state.players.find(player => player.id === state.turn);
+        const activeUser = state.users.find(user => user.id === active?.ownerId);
+        const isMyTurn = active?.ownerId === ownerId;
+
+        if (!active) {
+            this.banner.textContent = '';
+            setHidden(this.banner, true);
+        } else if (isMyTurn) {
+            this.banner.textContent = `YOUR TURN — ${seatLabel(active)}`;
+            this.banner.classList.add('active');
+            this.banner.classList.remove('waiting');
+            setHidden(this.banner, false);
+        } else {
+            const offline = activeUser && !activeUser.connected ? ' (RECONNECTING)' : '';
+            this.banner.textContent = `WAITING FOR P${activeUser?.number ?? '?'}${offline}`;
+            this.banner.classList.remove('active');
+            this.banner.classList.add('waiting');
+            setHidden(this.banner, false);
+        }
+
         const showActions =
-            me?.role === 'MR_X' && state.turn === myId && !state.pendingDoubleMove;
+            Boolean(myMrX) &&
+            isMyTurn &&
+            active?.id === myMrX?.id &&
+            !state.pendingDoubleMove;
         setHidden(this.mrxActions, !showActions);
 
-        this.doubleButton.disabled = !me || me.doubleTickets <= 0;
+        this.doubleButton.disabled = !myMrX || myMrX.doubleTickets <= 0;
         this.setDoubleMoveActive(doubleActive);
     }
 

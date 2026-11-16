@@ -8,6 +8,8 @@ export interface MenuCallbacks {
 export class MenuScreen {
     readonly root = element('div', 'screen menu-overlay');
     private readonly input: HTMLInputElement;
+    private readonly createButton: HTMLButtonElement;
+    private readonly joinButton: HTMLButtonElement;
 
     constructor(callbacks: MenuCallbacks) {
         const title = element('h1', 'menu-title');
@@ -15,7 +17,7 @@ export class MenuScreen {
 
         const subtitle = element('p', 'menu-subtitle', 'A GAME OF HIDE & SEEK');
 
-        const createButton = button('CREATE GAME', 'btn btn-primary menu-create');
+        this.createButton = button('CREATE GAME', 'btn btn-primary menu-create');
 
         const divider = element('div', 'menu-divider');
         divider.append(element('span', undefined, 'OR'));
@@ -27,25 +29,19 @@ export class MenuScreen {
         this.input.placeholder = 'ENTER CODE';
         this.input.maxLength = 5;
 
-        const joinButton = button('JOIN GAME', 'btn btn-secondary');
+        this.joinButton = button('JOIN GAME', 'btn btn-secondary');
 
-        const footer = element('p', 'menu-footer', '1-6 PLAYERS · ONLINE');
+        const footer = element('p', 'menu-footer', '2-6 SEATS · ONLINE');
         const prompt = element('p', 'menu-prompt', '► SELECT MODE ◄');
 
-        createButton.addEventListener('click', () => callbacks.onCreate());
-        joinButton.addEventListener('click', () => {
-            const code = this.input.value.trim().toUpperCase();
-            if (code) callbacks.onJoin(code);
-        });
+        this.createButton.addEventListener('click', () => callbacks.onCreate());
+        this.joinButton.addEventListener('click', () => this.join(callbacks));
         this.input.addEventListener('keydown', event => {
-            if (event.key === 'Enter') {
-                const code = this.input.value.trim().toUpperCase();
-                if (code) callbacks.onJoin(code);
-            }
+            if (event.key === 'Enter') this.join(callbacks);
         });
 
-        joinRow.append(this.input, joinButton);
-        this.root.append(title, subtitle, createButton, divider, joinRow, footer, prompt);
+        joinRow.append(this.input, this.joinButton);
+        this.root.append(title, subtitle, this.createButton, divider, joinRow, footer, prompt);
     }
 
     show(): void {
@@ -54,5 +50,16 @@ export class MenuScreen {
 
     hide(): void {
         setHidden(this.root, true);
+    }
+
+    setBusy(busy: boolean): void {
+        this.createButton.disabled = busy;
+        this.joinButton.disabled = busy;
+        this.input.disabled = busy;
+    }
+
+    private join(callbacks: MenuCallbacks): void {
+        const code = this.input.value.trim().toUpperCase();
+        if (code) callbacks.onJoin(code);
     }
 }

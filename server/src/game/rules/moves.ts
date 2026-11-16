@@ -1,4 +1,4 @@
-import { findAnyEdgeTo, findEdge } from '../../../../shared/src/map.ts';
+import { findAnyEdgeTo, findEdge, isNodeBlocked } from '../../../../shared/src/map.ts';
 import type {
     Edge,
     GameState,
@@ -15,7 +15,12 @@ function fail(code: MoveErrorCode, message: string): MoveResult {
     return { ok: false, code, message };
 }
 
-export function applyMove(game: GameState, player: Player, request: MoveRequest): MoveResult {
+export function applyMove(
+    game: GameState,
+    player: Player,
+    request: MoveRequest,
+    isSecondLeg: boolean
+): MoveResult {
     if (game.phase !== 'PLAYING') {
         return fail('BAD_STATE', 'The game is not in progress');
     }
@@ -59,6 +64,10 @@ export function applyMove(game: GameState, player: Player, request: MoveRequest)
         }
     }
 
+    if (isNodeBlocked(game.players, player, request.toNode)) {
+        return fail('NODE_OCCUPIED', 'That station is occupied by another pawn');
+    }
+
     if (!canAfford(player, costType)) {
         return fail('NO_TICKET', `No ${costType} tickets left`);
     }
@@ -76,7 +85,10 @@ export function applyMove(game: GameState, player: Player, request: MoveRequest)
     }
 
     if (player.role === 'MR_X') {
-        recordMrXMove(game, player, costType, Boolean(request.useDoubleTicket));
+        recordMrXMove(game, player, costType, {
+            isDoubleMove: Boolean(request.useDoubleTicket) || isSecondLeg,
+            hidePosition: isSecondLeg
+        });
     }
 
     return { ok: true };

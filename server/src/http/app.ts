@@ -15,10 +15,14 @@ export function createApp(): Express {
     if (fs.existsSync(config.clientDist)) {
         app.use(express.static(config.clientDist));
 
-        // SPA fallback for client-side routes. API and Socket.IO paths are
-        // handled before this, so only GET requests without a file hit it.
+        // SPA fallback for client-side routes. Assets with an extension are
+        // allowed to 404 instead of silently returning HTML.
         app.use((req: Request, res: Response, next: NextFunction) => {
-            if (req.method !== 'GET' || req.path.startsWith('/socket.io')) {
+            if (
+                req.method !== 'GET' ||
+                req.path.startsWith('/socket.io') ||
+                path.extname(req.path)
+            ) {
                 return next();
             }
             res.sendFile(path.join(config.clientDist, 'index.html'));

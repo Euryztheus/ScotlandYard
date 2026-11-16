@@ -43,7 +43,7 @@ export class MrXTracker {
 
         moveHistory.forEach(move => {
             const row = element('div', 'tracker-row');
-            if (REVEAL_ROUNDS.includes(move.round)) {
+            if (!move.isHidden) {
                 row.classList.add('reveal');
             }
 

@@ -2,10 +2,33 @@
 
 A real-time multiplayer implementation of the Scotland Yard board game.
 
+Two players can play as Mr. X and a team of up to five detectives, or one
+player can control several detective pawns from a single tab. Seats are held
+for five minutes after a disconnect, so a reload or a closed tab can reclaim
+the same game.
+
 **Credits:**
 
 - Map Data: https://github.com/AlexElvers/scotland-yard-data
 - Map Image: https://boardgamegeek.com/image/407682/scotland-yardd
+
+## Features
+
+- **Multi-seat detectives:** one user can add up to five detective pawns; each
+  seat keeps its own position and tickets. A typical 1-v-4 game is one Mr. X
+  plus four detectives controlled from one tab.
+- **Reconnects:** the browser stores an opaque client id and the last lobby
+  code in `localStorage`. Reloading or reopening the tab reattaches to the
+  same seats. Disconnected seats are held for five minutes; after that they are
+  removed.
+- **Session takeover:** opening the same game in another tab takes over the
+  user and tells the old tab that the session was replaced. Use one tab per
+  player; use an incognito window or another browser if two people share a
+  machine.
+- **Validated realtime boundary:** malformed moves, injected settings and
+  invalid lobby codes are rejected before they reach the game engine.
+- **Hidden information:** detective clients receive Mr. X's position as `0`;
+  the server projects each user's state separately.
 
 ## Stack
 
@@ -19,7 +42,7 @@ adapters around it.
 
 ## Development
 
-Install dependencies once from the repository root:
+Install dependencies once from the repository root (Node 24+):
 
 ```bash
 npm install
@@ -46,9 +69,14 @@ same-origin.
 
 ```bash
 npm run typecheck
+npm run lint
 npm test
 npm run build
 ```
+
+The tests cover the game rules, turn/round handling, multi-seat setup,
+projection of hidden state, socket payload validation, rate limiting and the
+disconnect lifecycle.
 
 ## Production with Docker
 
@@ -107,9 +135,49 @@ The server exposes `GET /healthz` for Docker and uptime checks.
 
 ### State and restarts
 
-Game state is currently held in memory. Restarting the container, deploying, or
-rebooting the VPS ends active games. Reconnection and persistence are follow-up
-features; they are intentionally out of scope for the current refactor.
+Game state is held in memory. A full server/container restart still ends active
+games; reconnection only covers a browser tab closing, a reload, or a short
+network interruption.
+
+On disconnect, a user's seats stay in the game and are marked offline. The
+default grace period is **five minutes**. Reconnecting restores the same seats
+and, when a full round has been played, the same tickets. If the grace period
+expires:
+
+- Mr. X disappears in the lobby: the lobby waits for a new user, who joins as
+  Mr. X.
+- Mr. X disappears during play: the detectives win by forfeit.
+- All detectives disappear: Mr. X wins by forfeit.
+- The host disappears: the host role moves to a connected user.
+
+The grace and sweep intervals can be overridden for local testing:
+
+```bash
+RECONNECT_GRACE_MS=1000 RECONNECT_SWEEP_MS=250 npm run dev:server
+```
+
+### Multi-seat rules
+
+One user can control several detectives. In the lobby:
+
+- Mr. X is always one seat.
+- A non-Mr. X user starts with one detective and can use **ADD DETECTIVE** /
+  **REMOVE DETECTIVE** to control up to five.
+- **READY** toggles all of that user's seats.
+- Claiming Mr. X is only allowed while the requester and the current Mr. X each
+  control exactly one seat; roles and positions are swapped.
+
+Detective seats act in seat order (DET 1, DET 2, …), not in arbitrary order.
+A double move is two moves in the same round and is logged twice; on a reveal
+round only the intermediate position of the first leg is shown, matching the
+board game rule. Mr. X starts with five black tickets, and the game ends after
+the detectives' final move in round 24. Starting stations are spaced so that
+Mr. X cannot be caught in the first round.
+
+Detectives (and Mr. X) cannot move onto a station occupied by another visible
+pawn. A detective may move onto Mr. X's station to capture him. Mr. X may not
+move onto a detective; if every possible move is blocked or unaffordable, the
+detectives win.
 
 ## Project layout
 
@@ -125,8 +193,11 @@ server/src/
   index.ts        bootstrap + graceful shutdown
   config.ts       environment configuration
   http/app.ts     Express, static client, /healthz
-  realtime/       Socket.IO setup, handlers, broadcasts
-  game/           store, factory, engine, rules, state projection
+  realtime/       Socket.IO setup, session attach/reconnect, handlers, broadcasts
+  realtime/lifecycle.ts  reconnect grace + user/seat removal
+  realtime/validation.ts move/settings payload validation
+  realtime/rateLimit.ts  per-socket action throttling
+  game/           store, session, factory, engine, rules, state projection
   util/           lobby code generation
 
 client/src/

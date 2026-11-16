@@ -4,11 +4,15 @@ import { GameStore } from '../game/GameStore.ts';
 import { registerGameHandlers } from './handlers/game.ts';
 import { registerLobbyHandlers } from './handlers/lobby.ts';
 import { registerSettingsHandlers } from './handlers/settings.ts';
+import { startReconnectSweeper } from './lifecycle.ts';
 import type { GameServer } from './types.ts';
 
 export function createSocketServer(httpServer: HttpServer): GameServer {
     const io: GameServer = new Server(httpServer);
     const store = new GameStore();
+    const stopSweeper = startReconnectSweeper(io, store);
+
+    httpServer.on('close', stopSweeper);
 
     io.on('connection', socket => {
         console.log('User connected:', socket.id);
@@ -16,10 +20,6 @@ export function createSocketServer(httpServer: HttpServer): GameServer {
         registerLobbyHandlers(io, socket, store);
         registerGameHandlers(io, socket, store);
         registerSettingsHandlers(io, socket, store);
-
-        socket.on('disconnect', () => {
-            console.log('User disconnected:', socket.id);
-        });
     });
 
     io.engine.on('connection_error', error => {

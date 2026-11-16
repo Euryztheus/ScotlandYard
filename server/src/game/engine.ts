@@ -5,47 +5,50 @@ import type {
     MoveRequest
 } from '../../../shared/src/types.ts';
 import { applyMove } from './rules/moves.ts';
-import { advanceTurn } from './rules/turn.ts';
-import { checkWinCondition } from './rules/win.ts';
+import { advanceTurn, maybeAdvanceRound } from './rules/turn.ts';
+import { applyWinCondition } from './rules/win.ts';
 
 export type PlayMoveResult =
     | { ok: true; gameOver?: GameOverResult }
     | { ok: false; code: MoveErrorCode; message: string };
 
-export function playMove(game: GameState, playerId: string, request: MoveRequest): PlayMoveResult {
-    const player = game.players.find(candidate => candidate.id === playerId);
+export function playMove(game: GameState, ownerId: string, request: MoveRequest): PlayMoveResult {
+    const player = game.players.find(candidate => candidate.id === game.turn);
     if (!player) {
-        return { ok: false, code: 'INVALID_PLAYER', message: 'Player is not in this game' };
+        return { ok: false, code: 'NOT_YOUR_TURN', message: 'There is no active turn' };
+    }
+    if (player.ownerId !== ownerId) {
+        return { ok: false, code: 'NOT_YOUR_TURN', message: 'It is not your turn' };
     }
 
-    const moveResult = applyMove(game, player, request);
+    const isSecondLeg = Boolean(game.pendingDoubleMove) && player.role === 'MR_X';
+
+    const moveResult = applyMove(game, player, request, isSecondLeg);
     if (!moveResult.ok) {
         return moveResult;
     }
 
-    let winCheck = checkWinCondition(game);
-    if (winCheck.gameOver) {
-        game.phase = 'FINISHED';
-        return { ok: true, gameOver: winCheck };
+    let winResult = applyWinCondition(game);
+    if (winResult) {
+        return { ok: true, gameOver: winResult };
     }
 
-    // First leg of a double move: Mr. X plays again.
+    // First leg of a double move: Mr. X plays again in the same round.
     if (request.useDoubleTicket && player.role === 'MR_X') {
         game.pendingDoubleMove = true;
         return { ok: true };
     }
 
-    // Second leg of a double move: clear the flag and rotate normally.
-    if (game.pendingDoubleMove && player.role === 'MR_X') {
+    if (isSecondLeg) {
         game.pendingDoubleMove = false;
     }
 
     advanceTurn(game, player.id);
+    maybeAdvanceRound(game);
 
-    winCheck = checkWinCondition(game);
-    if (winCheck.gameOver) {
-        game.phase = 'FINISHED';
-        return { ok: true, gameOver: winCheck };
+    winResult = applyWinCondition(game);
+    if (winResult) {
+        return { ok: true, gameOver: winResult };
     }
 
     return { ok: true };

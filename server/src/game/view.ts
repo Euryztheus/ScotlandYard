@@ -1,14 +1,17 @@
 import type { GameState } from '../../../shared/src/types.ts';
 
 /**
- * Builds the state a specific player is allowed to see. Detectives must not
- * receive Mr. X's real position; the hidden token is represented by node 0.
+ * Builds the state a specific user is allowed to see. A user playing Mr. X
+ * sees the real position; a detective-only user sees the hidden token as
+ * node 0. Users are groups because one user can control several detectives.
  */
-export function projectStateFor(game: GameState, viewerId: string): GameState {
+export function projectStateFor(game: GameState, viewerOwnerId: string): GameState {
     const state = structuredClone(game);
-    const viewer = state.players.find(player => player.id === viewerId);
+    const viewerIsMrX = game.players.some(
+        player => player.ownerId === viewerOwnerId && player.role === 'MR_X'
+    );
 
-    if (viewer?.role === 'DETECTIVE') {
+    if (!viewerIsMrX) {
         state.players.forEach(player => {
             if (player.role === 'MR_X') {
                 player.position = 0;

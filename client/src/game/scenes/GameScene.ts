@@ -1,25 +1,25 @@
 import Phaser from 'phaser';
-import { getEdges } from '../../../../shared/src/map.ts';
-import type { GameNode, GameState, MoveRequest, Player } from '../../../../shared/src/types.ts';
+import { getEdges, isNodeBlocked } from '../../../../shared/src/map.ts';
+import type { GameNode, GameState, Player } from '../../../../shared/src/types.ts';
 import { CameraController } from '../CameraController.ts';
 import { findLastKnownPosition } from '../history.ts';
+import type { TransportRequest } from '../transport.ts';
 import { MapRenderer } from '../MapRenderer.ts';
 import { TokenManager } from '../TokenManager.ts';
-import { TransportMenu } from '../TransportMenu.ts';
 
-export const MOVE_INTENT_EVENT = 'move-intent';
+export const TRANSPORT_REQUEST_EVENT = 'transport-request';
 export const SCENE_READY_EVENT = 'scene-ready';
 
 export class GameScene extends Phaser.Scene {
     private mapRenderer!: MapRenderer;
     private cameraController!: CameraController;
     private tokenManager!: TokenManager;
-    private transportMenu!: TransportMenu;
 
     private currentPlayers: Player[] = [];
-    private myId = '';
+    private myOwnerId = '';
     private lastState: GameState | null = null;
     private globalVisibility = true;
+    private pendingFocusPlayerId = '';
 
     constructor() {
         super('GameScene');
@@ -33,19 +33,24 @@ export class GameScene extends Phaser.Scene {
         this.mapRenderer = new MapRenderer(this);
         this.cameraController = new CameraController(this);
         this.tokenManager = new TokenManager(this);
-        this.transportMenu = new TransportMenu(this);
 
-        this.mapRenderer.render(node => this.handleNodeClick(node));
+        this.mapRenderer.render((node, pointer) => this.handleNodeClick(node, pointer));
 
         if (this.lastState) {
             this.applyState(this.lastState);
         }
 
+        if (this.pendingFocusPlayerId) {
+            const playerId = this.pendingFocusPlayerId;
+            this.pendingFocusPlayerId = '';
+            this.focusOnPlayer(playerId);
+        }
+
         this.game.events.emit(SCENE_READY_EVENT);
     }
 
-    setMyId(id: string): void {
-        this.myId = id;
+    setMyOwnerId(id: string): void {
+        this.myOwnerId = id;
     }
 
     setPlayersVisible(visible: boolean): void {
@@ -63,9 +68,24 @@ export class GameScene extends Phaser.Scene {
         }
     }
 
+    clearGame(): void {
+        this.lastState = null;
+        this.currentPlayers = [];
+        this.pendingFocusPlayerId = '';
+        this.myOwnerId = '';
+        this.tokenManager?.clear();
+        this.cameras?.main?.setScroll(0, 0);
+        this.cameras?.main?.setZoom(1);
+    }
+
     focusOnPlayer(playerId: string): void {
+        if (!this.cameraController) {
+            this.pendingFocusPlayerId = playerId;
+            return;
+        }
+
         const player = this.currentPlayers.find(candidate => candidate.id === playerId);
-        if (!player || !this.cameraController) return;
+        if (!player) return;
 
         let targetId = player.position;
 
@@ -78,22 +98,38 @@ export class GameScene extends Phaser.Scene {
     }
 
     private applyState(state: GameState): void {
-        this.tokenManager.update(state.players, this.globalVisibility, state.moveHistory);
+        this.tokenManager.update(
+            state.players,
+            state.users,
+            this.globalVisibility,
+            state.moveHistory
+        );
     }
 
-    private handleNodeClick(targetNode: GameNode): void {
-        this.transportMenu.destroy();
+    private handleNodeClick(
+        targetNode: GameNode,
+        pointer: Phaser.Input.Pointer
+    ): void {
+        const state = this.lastState;
+        if (!state || !this.myOwnerId) return;
 
-        if (!this.myId) return;
+        const active = state.players.find(player => player.id === state.turn);
+        if (!active || active.ownerId !== this.myOwnerId) return;
 
-        const me = this.currentPlayers.find(player => player.id === this.myId);
-        if (!me) return;
+        const edges = getEdges(active.position).filter(
+            edge =>
+                edge.to === targetNode.id &&
+                !isNodeBlocked(this.currentPlayers, active, edge.to)
+        );
+        if (edges.length === 0) return;
 
-        const validEdges = getEdges(me.position).filter(edge => edge.to === targetNode.id);
-        if (validEdges.length === 0) return;
-
-        this.transportMenu.show(targetNode, validEdges, me, (move: MoveRequest) => {
-            this.game.events.emit(MOVE_INTENT_EVENT, move);
-        });
+        const request: TransportRequest = {
+            target: targetNode,
+            edges,
+            me: active,
+            screenX: pointer.x,
+            screenY: pointer.y
+        };
+        this.game.events.emit(TRANSPORT_REQUEST_EVENT, request);
     }
 }

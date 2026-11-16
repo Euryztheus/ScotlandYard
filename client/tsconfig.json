@@ -17,5 +17,5 @@
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true
   },
-  "include": ["src", "../shared/src"]
+  "include": ["src", "../shared/src", "vite.config.ts"]
 }

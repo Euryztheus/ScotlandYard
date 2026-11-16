@@ -5,8 +5,7 @@ import type {
     GameNode,
     MapData,
     Player,
-    TicketType,
-    Transport
+    TicketType
 } from './types.ts';
 
 const mapData = rawMapData as unknown as MapData;
@@ -31,10 +30,6 @@ export function findAnyEdgeTo(fromId: number, toId: number): Edge | undefined {
     return getEdges(fromId).find(edge => edge.to === toId);
 }
 
-export function isTicketType(type: EdgeType): type is Transport {
-    return type !== 'water';
-}
-
 /**
  * The ticket a player would spend on an edge, or null when the edge is not
  * usable by that player at all.
@@ -52,6 +47,26 @@ export function ticketTypeForEdge(edge: Edge, player: Player): TicketType | null
     return null;
 }
 
-export function hasValidMoves(player: Player): boolean {
-    return getEdges(player.position).some(edge => ticketTypeForEdge(edge, player) !== null);
+/**
+ * Visible pawns may not share a station. A detective may still move onto
+ * Mr. X's station (that is the capture); Mr. X may not move onto a detective.
+ */
+export function isNodeBlocked(players: Player[], movingPlayer: Player, nodeId: number): boolean {
+    if (movingPlayer.role === 'DETECTIVE') {
+        return players.some(
+            player =>
+                player.role === 'DETECTIVE' &&
+                player.id !== movingPlayer.id &&
+                player.position === nodeId
+        );
+    }
+    return players.some(player => player.role === 'DETECTIVE' && player.position === nodeId);
+}
+
+export function hasValidMoves(players: Player[], player: Player): boolean {
+    return getEdges(player.position).some(
+        edge =>
+            ticketTypeForEdge(edge, player) !== null &&
+            !isNodeBlocked(players, player, edge.to)
+    );
 }

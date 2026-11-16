@@ -6,7 +6,7 @@ import type { GameNode } from '../../../shared/src/types.ts';
 export class MapRenderer {
     constructor(private readonly scene: Phaser.Scene) {}
 
-    render(onNodeClick: (node: GameNode) => void): void {
+    render(onNodeClick: (node: GameNode, pointer: Phaser.Input.Pointer) => void): void {
         this.scene.add.image(0, 0, 'map-bg').setOrigin(0).setDepth(0);
         this.scene.cameras.main.setBounds(0, 0, MAP_WIDTH, MAP_HEIGHT);
 
@@ -25,7 +25,9 @@ export class MapRenderer {
                 circle.setFillStyle(0xffd447, 0);
                 circle.setStrokeStyle(2, 0xffd447, 0);
             });
-            circle.on('pointerdown', () => onNodeClick(node));
+            circle.on('pointerdown', (pointer: Phaser.Input.Pointer) =>
+                onNodeClick(node, pointer)
+            );
         });
     }
 }

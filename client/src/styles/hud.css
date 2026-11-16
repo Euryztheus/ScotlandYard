@@ -35,7 +35,7 @@
 }
 
 .player-list {
-    max-height: 38vh;
+    max-height: 48vh;
     overflow-y: auto;
 }
 
@@ -295,4 +295,131 @@
     color: var(--yellow);
     font-family: var(--font-display);
     font-size: 8px;
+}
+
+.hud-banner {
+    margin: 0 0 10px;
+    padding: 7px 9px;
+    border: 2px solid var(--line);
+    background: var(--ink);
+    color: var(--muted);
+    font-family: var(--font-display);
+    font-size: 8px;
+    line-height: 1.6;
+    text-transform: uppercase;
+}
+
+.hud-banner.active {
+    border-color: var(--green);
+    color: var(--green);
+}
+
+.hud-banner.waiting {
+    border-color: var(--line);
+}
+
+.player-row.offline {
+    opacity: 0.55;
+}
+
+.offline-tag {
+    margin-left: 6px;
+    padding: 2px 4px;
+    border: 1px solid var(--red);
+    color: var(--red);
+    font-family: var(--font-display);
+    font-size: 7px;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.transport-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 1800;
+    pointer-events: none;
+}
+
+.transport-backdrop {
+    position: absolute;
+    inset: 0;
+    pointer-events: auto;
+    background: rgba(0, 0, 0, 0.28);
+}
+
+.transport-menu {
+    position: absolute;
+    width: 200px;
+    padding: 10px;
+    border: 3px solid var(--line-bright);
+    background: var(--panel);
+    box-shadow:
+        0 0 0 3px var(--ink),
+        6px 6px 0 var(--shadow);
+    pointer-events: auto;
+}
+
+.transport-title {
+    color: var(--muted);
+    font-family: var(--font-display);
+    font-size: 8px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.transport-node {
+    margin: 4px 0 6px;
+    padding-bottom: 6px;
+    border-bottom: 2px dashed var(--line);
+    color: var(--text);
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.transport-option {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 8px 6px;
+    border: 3px solid var(--ink);
+    border-radius: 0;
+    font-family: var(--font-display);
+    font-size: 9px;
+    line-height: 1.35;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.25);
+}
+
+.transport-option.taxi {
+    background: var(--yellow);
+    color: var(--ink);
+}
+
+.transport-option.bus {
+    background: var(--cyan);
+    color: var(--ink);
+}
+
+.transport-option.underground {
+    background: var(--red);
+    color: var(--ink);
+}
+
+.transport-option.water {
+    background: #2a3358;
+    color: #ffffff;
+}
+
+.transport-option.black {
+    background: #000000;
+    border-color: var(--line-bright);
+    color: #ffffff;
+}
+
+.transport-option:hover {
+    filter: brightness(1.12);
 }

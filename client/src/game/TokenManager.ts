@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import { getNode } from '../../../shared/src/map.ts';
-import type { MoveRecord, Player } from '../../../shared/src/types.ts';
+import type { GameUserView, MoveRecord, Player } from '../../../shared/src/types.ts';
 import { detectiveColorHex } from './colors.ts';
 import { findLastKnownPosition } from './history.ts';
 
@@ -9,8 +9,13 @@ export class TokenManager {
 
     constructor(private readonly scene: Phaser.Scene) {}
 
-    update(players: Player[], visible: boolean, history: MoveRecord[]): void {
-        const playerIds = new Set(players.map(player => player.id));
+    update(
+        players: Player[],
+        users: GameUserView[],
+        visible: boolean,
+        history: MoveRecord[]
+    ): void {        const playerIds = new Set(players.map(player => player.id));
+        const connectedByOwner = new Map(users.map(user => [user.id, user.connected]));
 
         for (const [id, token] of this.tokens) {
             if (!playerIds.has(id)) {
@@ -21,7 +26,7 @@ export class TokenManager {
 
         players.forEach(player => {
             if (!this.tokens.has(player.id)) {
-                this.createToken(player, players);
+                this.createToken(player);
             }
         });
 
@@ -34,29 +39,38 @@ export class TokenManager {
                 return;
             }
 
+            const connected = connectedByOwner.get(player.ownerId) ?? true;
+
             if (player.role === 'DETECTIVE') {
-                this.moveToken(token, player.position, 1);
+                this.moveToken(token, player.position, connected ? 1 : 0.4);
                 return;
             }
 
             if (player.position > 0) {
-                this.moveToken(token, player.position, 1);
+                this.moveToken(token, player.position, connected ? 1 : 0.4);
                 return;
             }
 
             const lastKnown = findLastKnownPosition(history);
             if (lastKnown > 0) {
-                this.moveToken(token, lastKnown, 0.9);
+                this.moveToken(token, lastKnown, connected ? 0.9 : 0.4);
             } else {
                 token.setVisible(false);
             }
         });
     }
 
-    private createToken(player: Player, players: Player[]): void {
+    clear(): void {
+        for (const token of this.tokens.values()) {
+            token.destroy();
+        }
+        this.tokens.clear();
+    }
+
+    private createToken(player: Player): void {
         const container = this.scene.add.container(0, 0).setDepth(100);
         const color =
-            player.role === 'DETECTIVE' ? detectiveColorHex(player.id, players) : 0x000000;
+            player.role === 'DETECTIVE' ? detectiveColorHex(player.seat) : 0x000000;
 
         const outline = this.scene.add.circle(0, 0, 17, 0x05070d);
         const circle = this.scene.add.circle(0, 0, 15, color).setStrokeStyle(2, 0xffffff);
@@ -77,6 +91,7 @@ export class TokenManager {
         token.setVisible(true);
         token.setAlpha(alpha);
 
+        this.scene.tweens.killTweensOf(token);
         this.scene.tweens.add({
             targets: token,
             x: node.x,

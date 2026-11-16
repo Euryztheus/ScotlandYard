@@ -26,18 +26,18 @@ export class SettingsForm {
                 <div class="settings-card detectives">
                     <strong>DETECTIVES</strong>
                     <div class="settings-fields">
-                        TAXI: <input type="number" data-setting="det-taxi" min="0"><br>
-                        BUS: <input type="number" data-setting="det-bus" min="0"><br>
-                        UND: <input type="number" data-setting="det-und" min="0">
+                        TAXI: <input type="number" data-setting="det-taxi" min="0" max="99"><br>
+                        BUS: <input type="number" data-setting="det-bus" min="0" max="99"><br>
+                        UND: <input type="number" data-setting="det-und" min="0" max="99">
                     </div>
                 </div>
                 <div class="settings-card mrx">
                     <strong>MR. X</strong>
                     <div class="settings-fields">
-                        TAXI: <input type="number" data-setting="mrx-taxi" min="0"><br>
-                        BUS: <input type="number" data-setting="mrx-bus" min="0"><br>
-                        UND: <input type="number" data-setting="mrx-und" min="0"><br>
-                        BLACK: <input type="number" data-setting="mrx-black" min="0"><br>
+                        TAXI: <input type="number" data-setting="mrx-taxi" min="0" max="99"><br>
+                        BUS: <input type="number" data-setting="mrx-bus" min="0" max="99"><br>
+                        UND: <input type="number" data-setting="mrx-und" min="0" max="99"><br>
+                        BLACK: <input type="number" data-setting="mrx-black" min="0" max="99"><br>
                         <hr class="settings-divider">
                         2X: <input type="number" data-setting="mrx-2x" min="0" max="5">
                     </div>
@@ -69,18 +69,29 @@ export class SettingsForm {
             input.disabled = !isHost;
         });
 
-        // Do not overwrite a field while the host is typing in it.
-        if (!isHost || document.activeElement?.tagName !== 'INPUT') {
-            this.infinite.checked = settings.infiniteTickets;
-            this.inputs.detTaxi.value = String(settings.detectiveStartTickets.taxi);
-            this.inputs.detBus.value = String(settings.detectiveStartTickets.bus);
-            this.inputs.detUnd.value = String(settings.detectiveStartTickets.underground);
-            this.inputs.mrxTaxi.value = String(settings.mrXStartTickets.taxi);
-            this.inputs.mrxBus.value = String(settings.mrXStartTickets.bus);
-            this.inputs.mrxUnd.value = String(settings.mrXStartTickets.underground);
-            this.inputs.mrxBlack.value = String(settings.mrXStartTickets.black ?? 0);
-            this.inputs.mrx2x.value = String(settings.mrXDoubleTickets ?? 2);
-        }
+        // Only protect the field the host is currently editing. Other fields
+        // should still reflect broadcasts from the server.
+        const focused = document.activeElement;
+
+        this.infinite.checked = settings.infiniteTickets;
+
+        const values: Record<InputKey, number> = {
+            detTaxi: settings.detectiveStartTickets.taxi,
+            detBus: settings.detectiveStartTickets.bus,
+            detUnd: settings.detectiveStartTickets.underground,
+            mrxTaxi: settings.mrXStartTickets.taxi,
+            mrxBus: settings.mrXStartTickets.bus,
+            mrxUnd: settings.mrXStartTickets.underground,
+            mrxBlack: settings.mrXStartTickets.black,
+            mrx2x: settings.mrXDoubleTickets
+        };
+
+        (Object.keys(this.inputs) as InputKey[]).forEach(key => {
+            const input = this.inputs[key];
+            if (input !== focused) {
+                input.value = String(values[key]);
+            }
+        });
     }
 
     read(): Partial<GameSettings> {
