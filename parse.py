@@ -104,4 +104,4 @@ def parse_scotland_yard_data(stations_path, connections_path, output_path, flip_
     print(f"Output: {output_path}")
 
 if __name__ == "__main__":
-    parse_scotland_yard_data("stations.txt", "connections.txt", "shared/mapData.json", flip_y=False)
+    parse_scotland_yard_data("stations.txt", "connections.txt", "shared/src/mapData.json", flip_y=False)

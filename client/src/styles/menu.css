@@ -1,0 +1,79 @@
+.menu-overlay {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(540px, 92vw);
+    padding: 34px 30px 26px;
+    text-align: center;
+}
+
+.menu-title {
+    margin: 0 0 12px;
+    color: var(--yellow);
+    font-size: clamp(20px, 4vw, 34px);
+    line-height: 1.45;
+    text-shadow:
+        4px 4px 0 #7a2d00,
+        8px 8px 0 var(--ink);
+}
+
+.menu-subtitle {
+    margin: 0 0 26px;
+    color: var(--cyan);
+    font-size: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.menu-create {
+    width: 100%;
+}
+
+.menu-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    color: var(--muted);
+    font-family: var(--font-display);
+    font-size: 8px;
+}
+
+.menu-divider::before,
+.menu-divider::after {
+    content: '';
+    flex: 1;
+    border-top: 3px dashed var(--line);
+}
+
+.join-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.join-row .code-input {
+    width: 160px;
+    text-align: center;
+}
+
+.join-row .btn {
+    flex: 1;
+}
+
+.menu-footer {
+    margin: 20px 0 0;
+    color: var(--muted);
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.menu-prompt {
+    margin: 14px 0 0;
+    color: var(--green);
+    font-family: var(--font-display);
+    font-size: 8px;
+    line-height: 1.6;
+    animation: blink 1.2s steps(1) infinite;
+}

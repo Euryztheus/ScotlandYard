@@ -1,0 +1,12 @@
+node_modules
+*/node_modules
+dist
+*/dist
+.git
+.gitignore
+coverage
+*.tsbuildinfo
+.env
+.env.*
+README.md
+venv
