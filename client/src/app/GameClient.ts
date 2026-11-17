@@ -13,6 +13,7 @@ import {
 } from '../game/scenes/GameScene.ts';
 import type { TransportRequest } from '../game/transport.ts';
 import { Network } from '../network/Network.ts';
+import { ConfirmDialog } from '../ui/components/ConfirmDialog.ts';
 import { ConnectionOverlay } from '../ui/components/ConnectionOverlay.ts';
 import { TransportMenu } from '../ui/components/TransportMenu.ts';
 import { showToast } from '../ui/dom.ts';
@@ -27,6 +28,7 @@ export class GameClient {
     private readonly hud: GameHud;
     private readonly gameOver: GameOverScreen;
     private readonly connection = new ConnectionOverlay();
+    private readonly confirmDialog = new ConfirmDialog();
     private readonly transportMenu = new TransportMenu();
     private readonly phaser: Phaser.Game;
     private readonly network: Network;
@@ -77,7 +79,8 @@ export class GameClient {
             this.hud.root,
             this.gameOver.root,
             this.connection.root,
-            this.transportMenu.root
+            this.transportMenu.root,
+            this.confirmDialog.root
         );
         this.menu.show();
         this.lobby.hide();
@@ -128,6 +131,7 @@ export class GameClient {
                 this.sessionReplaced = true;
                 this.hasSession = false;
                 this.hideTransportMenu();
+                this.confirmDialog.cancel();
                 this.menu.setBusy(false);
                 this.connection.show(
                     'SESSION OPENED ELSEWHERE',
@@ -252,15 +256,35 @@ export class GameClient {
     }
 
     private leaveLobby(): void {
-        if (!window.confirm('Leave this lobby?')) return;
-        this.network.leaveGame();
-        this.resetToMenu();
+        void this.confirmDialog
+            .ask({
+                title: 'LEAVE LOBBY?',
+                message: 'You will give up your seats in this lobby.',
+                confirmLabel: 'LEAVE',
+                cancelLabel: 'STAY',
+                danger: true
+            })
+            .then(confirmed => {
+                if (!confirmed) return;
+                this.network.leaveGame();
+                this.resetToMenu();
+            });
     }
 
     private leaveActiveGame(): void {
-        if (!window.confirm('Leave this game? Your seats will be released.')) return;
-        this.network.leaveGame();
-        this.resetToMenu();
+        void this.confirmDialog
+            .ask({
+                title: 'LEAVE GAME?',
+                message: 'Your seats will be released and the game will continue without you.',
+                confirmLabel: 'LEAVE',
+                cancelLabel: 'STAY',
+                danger: true
+            })
+            .then(confirmed => {
+                if (!confirmed) return;
+                this.network.leaveGame();
+                this.resetToMenu();
+            });
     }
 
     private leaveFinishedGame(): void {
@@ -277,6 +301,7 @@ export class GameClient {
         this.connected = false;
         this.transportTurn = '';
         this.transportMenu.hide();
+        this.confirmDialog.cancel();
         this.lobby.hide();
         this.hud.hide();
         this.gameOver.hide();

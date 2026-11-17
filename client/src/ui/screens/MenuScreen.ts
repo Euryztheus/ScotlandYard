@@ -15,8 +15,6 @@ export class MenuScreen {
         const title = element('h1', 'menu-title');
         title.innerHTML = 'SCOTLAND<br>YARD';
 
-        const subtitle = element('p', 'menu-subtitle', 'A GAME OF HIDE & SEEK');
-
         this.createButton = button('CREATE GAME', 'btn btn-primary menu-create');
 
         const divider = element('div', 'menu-divider');
@@ -41,7 +39,7 @@ export class MenuScreen {
         });
 
         joinRow.append(this.input, this.joinButton);
-        this.root.append(title, subtitle, this.createButton, divider, joinRow, footer, prompt);
+        this.root.append(title, this.createButton, divider, joinRow, footer, prompt);
     }
 
     show(): void {

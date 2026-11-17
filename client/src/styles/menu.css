@@ -17,14 +17,6 @@
         8px 8px 0 var(--ink);
 }
 
-.menu-subtitle {
-    margin: 0 0 26px;
-    color: var(--cyan);
-    font-size: 20px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
 .menu-create {
     width: 100%;
 }
